@@ -6,28 +6,39 @@ const StContainer = styled.div`
   margin: 0 auto;
   padding: 30px;
   font-family: Arial, sans-serif;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
 `;
 
 const StTitleInput = styled.input`
   width: 100%;
-  padding: 10px;
   margin-bottom: 1rem;
   font-size: 50px;
   font-weight: bold;
   border: none;
   outline: none;
+  box-sizing: border-box;
 `;
 
 const StTextArea = styled.textarea`
   width: 100%;
   min-height: 400px;
-  padding: 10px;
   font-size: 20px;
   font-weight: bold;
   border: none;
   margin-bottom: 1rem;
   outline: none;
   resize: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: black;
+  }
+  &::-webkit-input-placeholder {
+    color: black;
+  }
+  &::-ms-input-placeholder {
+    color: black;
+  }
 `;
 
 const StLabel = styled.label`
@@ -49,6 +60,7 @@ const StLabel = styled.label`
 
 const StInput = styled.input`
   display: none;
+  width: 100%;
 `;
 
 const StButtonContainer = styled.div`
@@ -58,14 +70,16 @@ const StButtonContainer = styled.div`
 
 const StBackButton = styled.button`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border: none;
   background: none;
   color: black;
   font-size: 18px;
-  cursor: pointer;
-  padding: 10px;
   font-weight: bold;
+  padding: 0;
+
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -77,13 +91,13 @@ const StBackButton = styled.button`
 `;
 
 const StAddButton = styled.button`
-  padding: 10px 20px;
-  font-size: 1rem;
+  background-color: #333;
   color: white;
-  background-color: darkgray;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
 
   &:not(:last-child) {
