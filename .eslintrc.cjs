@@ -67,11 +67,6 @@ module.exports = {
             position: 'after'
           },
           {
-            pattern: '@supabase/*',
-            group: 'internal',
-            position: 'after'
-          },
-          {
             pattern: '@utils/*',
             group: 'internal',
             position: 'after'
