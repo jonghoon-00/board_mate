@@ -63,13 +63,13 @@ function FixMyProfile() {
     navigate('/MyPage');
   };
 
-  useEffect(() => {
-    if (user) {
-      setProfileImage(user.profile);
-      setProfileName(user.nickName);
-      setUserEmail(user.email);
-    }
-  }, [user]);
+  //   useEffect(() => {
+  //     if (user) {
+  //       setProfileImage(user.profile);
+  //       setProfileName(user.nickName);
+  //       setUserEmail(user.email);
+  //     }
+  //   }, [user]);
 
   return (
     <Section>
@@ -77,7 +77,7 @@ function FixMyProfile() {
         <ImageBox>
           <img
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            src={profileImage ? profileImage : user && user.profile && user.profile}
+            // src={profileImage ? profileImage : user && user.profile && user.profile}
             alt="profile image"
           />
         </ImageBox>

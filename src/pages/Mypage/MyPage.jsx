@@ -12,7 +12,7 @@ const MyPage = () => {
   //   const [matchedUser, setMatchedUser] = useState(null);
 
   const onClickProfile = () => {
-    navigate('/FixMyProfile');
+    navigate('/fix-my-profile');
   };
 
   //   const filteredBlogs = blogs.filter((blog) => blog.user_id === email);
