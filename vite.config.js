@@ -16,7 +16,6 @@ export default defineConfig({
       { find: '@query', replacement: '/src/query' },
       { find: '@redux', replacement: path.resolve(__dirname, '/src/redux') },
       { find: '@routes', replacement: '/src/routes' },
-      { find: '@supabase', replacement: '/src/supabase' },
       { find: '@utils', replacement: path.resolve(__dirname, '/src/utils') }
     ]
   }
