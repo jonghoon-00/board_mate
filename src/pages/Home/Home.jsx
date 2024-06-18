@@ -1,7 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import { StDiv } from './Home.styled';
 import styled from 'styled-components';
+import { getPosts } from '@/api/api.posts';
 
 export const Home = () => {
+  const {
+    data: posts,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['posts'],
+    queryFn: getPosts
+  });
+  console.log(posts);
+
   return (
     <StDiv>
       <StHomeSection>
@@ -10,7 +22,19 @@ export const Home = () => {
           <StCardsCotainer>
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
             <StCards>
-              <StCard>
+              {posts &&
+                posts.map((post) => {
+                  return (
+                    <StCard key={post.id}>
+                      <StCardImg />
+                      <StTitle>{post.title}</StTitle>
+                      <StPlace>{post.address}</StPlace>
+                      <StContent>{post.content}</StContent>
+                      <StPostItem>모집중</StPostItem>
+                    </StCard>
+                  );
+                })}
+              {/* <StCard>
                 <>
                   <StCardImg />
                   <StTitle>제목</StTitle>
@@ -24,7 +48,7 @@ export const Home = () => {
                 <StPostItem>모집중</StPostItem>
               </StCard>
               <StCard>카드~</StCard>
-              <StCard>카드~</StCard>
+              <StCard>카드~</StCard> */}
             </StCards>
           </StCardsCotainer>
         </StCardsSection>
@@ -70,7 +94,7 @@ const StCardsAlignBtn = styled.button`
   font-weight: 700;
 `;
 
-const StCards = styled.div`
+const StCards = styled.ul`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 380px));
@@ -79,7 +103,7 @@ const StCards = styled.div`
   row-gap: 60px;
 `;
 
-const StCard = styled.div`
+const StCard = styled.li`
   background-color: #fcfdff;
   width: 380px;
   height: 323px;
@@ -95,7 +119,7 @@ const StCard = styled.div`
 
 const StCardImg = styled.div`
   background-color: black;
-  width: 340px;
+  width: 100%;
   height: 200px;
   border-radius: 0.5rem;
 `;
@@ -106,6 +130,10 @@ const StTitle = styled.p`
 
 const StPlace = styled.p`
   font-size: 1.5rem;
+`;
+
+const StContent = styled.p`
+  font-size: 16px;
 `;
 
 const StPostItem = styled.div`
