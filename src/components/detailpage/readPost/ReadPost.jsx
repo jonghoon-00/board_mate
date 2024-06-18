@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Comments from '../coments/Comments';
 import {
   StButtonDiv,
@@ -10,6 +11,7 @@ import {
 
 const ReadPost = ({ setIsEdit, targetData }) => {
   const { title, address, image_url, is_recruit, content } = targetData;
+  const [commentIsEdit, setCommentIsEdit] = useState(false);
 
   return (
     <>
@@ -30,7 +32,7 @@ const ReadPost = ({ setIsEdit, targetData }) => {
       </StContentSection>
 
       <hr />
-      <Comments />
+      <Comments setCommentIsEdit={setCommentIsEdit} commentIsEdit={commentIsEdit} />
     </>
   );
 };

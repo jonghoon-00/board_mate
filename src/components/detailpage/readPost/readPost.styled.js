@@ -2,40 +2,67 @@ import styled from 'styled-components';
 export const StDiv = styled.div``;
 
 export const StContainer = styled.div`
-  border: 1px solid black;
   width: 650px;
-  margin: 0 auto;
+  height: auto;
+  margin: 60px auto;
   padding: 1.2rem 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
 `;
 
 export const StTitleSection = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 12vh;
+  align-items: end;
+  height: 60px;
 `;
 export const StTitleH1 = styled.h1`
-  font-size: 3.8rem;
+  font-size: 3rem;
+  font-weight: 700;
 `;
 export const StRecruitButton = styled.button`
-  margin: 2rem 0;
+  width: 90px;
+  height: 32px;
+  color: #f2b564;
+  background-color: #fcfdff;
+  border-radius: 1rem;
+  border: 2px solid #f2b564;
+  font-size: 14px;
+  font-weight: 700;
 `;
 
 export const StSubSection = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 6vh;
+  align-items: center;
+  height: 35px;
+  margin-top: 40px;
+  font-size: 1rem;
+  font-weight: 700;
 `;
+
 export const StButtonDiv = styled.div`
   display: flex;
+  gap: 20px;
   & button {
-    margin: 0.5rem;
+    width: 5.3rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: #2d2d2d;
+    color: #fcfdff;
+    font-size: 12px;
+    font-weight: 700;
   }
 `;
 
 export const StContentSection = styled.div`
+  margin-top: 40px;
   min-height: 40vh;
   & p {
-    margin-top: 2rem;
+    padding: 20px 0 20px 0;
   }
+`;
+
+export const Hr = styled.hr`
+  border: 1px solid #b4b4b4;
 `;
