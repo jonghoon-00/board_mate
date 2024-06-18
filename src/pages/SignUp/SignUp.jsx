@@ -1,21 +1,45 @@
 import { Page } from '@/Layouts/Page';
+import { createProfileWithSupabase, signUpWithSupabase } from '@/api/api.auth';
 import { AuthInput } from '@/components/AuthInput/AuthInput';
 import { useInputs } from '@/hooks/useInputs';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { StButton, StDiv, StForm, StTitle } from './SignUp.styled';
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useInputs({
     nickname: '',
-    accountId: '',
+    email: '',
     password: '',
     passwordCheck: ''
   });
+
+  const { mutateAsync: signUp } = useMutation({
+    mutationFn: (data) => signUpWithSupabase(data),
+    onError: () => {},
+    onSuccess: async () => {
+      const result = await createProfileWithSupabase({ nickname: inputs.nickname });
+      console.log(result);
+      alert('회원가입 성공');
+      navigate('/');
+    }
+  });
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    const result = await signUp({
+      email: inputs.email,
+      password: inputs.password
+    });
+    console.log(result);
+  };
 
   return (
     <Page>
       <StDiv>
         <StTitle>회원가입</StTitle>
-        <StForm>
+        <StForm onSubmit={handleSubmitForm}>
           <AuthInput
             label="닉네임"
             name="nickname"
@@ -25,11 +49,11 @@ export const SignUp = () => {
             onChange={setInputs}
           />
           <AuthInput
-            label="아이디"
-            name="accountId"
-            type="text"
-            placeholder="아이디를 입력해주세요"
-            value={inputs.accountId}
+            label="이메일"
+            name="email"
+            type="email"
+            placeholder="이메일을 입력해주세요"
+            value={inputs.email}
             onChange={setInputs}
           />
           <AuthInput
