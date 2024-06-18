@@ -1,28 +1,55 @@
 import { addCommentData, getCommentData } from '@/api/api.comment';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { StCommentFormSection, StCommentList, StCommentSaveButton, StTextArea } from './comments.styled';
+import {
+  StCommentFormSection,
+  StCommentList,
+  StCommentP,
+  StCommentSaveButton,
+  StCommentWriterInfo,
+  StTextArea
+} from './comments.styled';
 
 const Comments = () => {
   const [comment, setComment] = useState('');
-  const postId = useParams().id;
+  const { id: postId } = useParams();
 
-  const addComment = async (e) => {
-    e.preventDefault();
-
-    setComment(comment);
-    addCommentData(postId, comment);
-  };
-
+  //
   const {
     data: comments,
     isPending,
     isError
   } = useQuery({
-    queryKey: ['comments'],
-    queryFn: getCommentData
+    queryKey: ['comments', postId],
+    queryFn: () => getCommentData(postId)
   });
+  ``;
+  const { mutation } = useMutation({
+    mutationFn: (newComment) => addCommentData(newComment),
+    onSuccess: () => {
+      navigate(0);
+      queryClient.invalidateQueries(['comments', postId]);
+      setComment('');
+    }
+  });
+
+  //댓글작성
+  const addComment = (e) => {
+    e.preventDefault();
+
+    mutation.mutate({ post_id: postId, comment });
+
+    // const newComment = {
+    //   post_id: postId,
+    //   comment
+    // };
+
+    // setComment(comment);
+    // addCommentData(postId, comment);
+    // mutation.mutate(newComment);
+    // setComment('');
+  };
 
   return (
     <StCommentFormSection onSubmit={addComment}>
@@ -42,8 +69,12 @@ const Comments = () => {
             return (
               <li key={comment.id}>
                 {/* TODO user 닉네임 가져와야함 */}
-                <p>닉네임</p>
-                {comment.created_at},{comment.comment}
+                <StCommentWriterInfo>
+                  <p>닉네임</p>
+                  <p>{comment.created_at}</p>
+                </StCommentWriterInfo>
+                <StCommentP>{comment.comment}</StCommentP>
+
                 <div>
                   {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
                   <button>수정</button>

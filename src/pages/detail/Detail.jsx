@@ -23,7 +23,6 @@ const Detail = () => {
 
     fetchThisData();
   }, []);
-
   return (
     <StContainer>
       {isEdit ? <EditPost setIsEdit={setIsEdit} /> : <ReadPost setIsEdit={setIsEdit} targetData={targetData} />}

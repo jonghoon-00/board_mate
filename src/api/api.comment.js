@@ -1,11 +1,7 @@
 import supabase from '@/supabase/supabaseClient';
 
-export const addCommentData = async (postId, comment, userId) => {
-  const { error } = await supabase.from('comments').insert({
-    post_id: postId,
-    comment
-    // TODO user_id: userId
-  });
+export const addCommentData = async (newComment) => {
+  const { error } = await supabase.from('comments').insert(newComment);
   if (error) {
     console.log(error);
   }
@@ -16,7 +12,6 @@ export const getCommentData = async () => {
   if (error) {
     console.log(error);
   } else {
-    console.log(data);
     return data;
   }
 };
