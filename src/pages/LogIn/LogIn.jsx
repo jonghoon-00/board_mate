@@ -1,17 +1,32 @@
 import { Page } from '@/Layouts/Page';
+import { signInWithSupabase } from '@/api/api.auth';
 import { AuthInput } from '@/components/AuthInput';
 import { useInputs } from '@/hooks/useInputs';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { StButton, StDiv, StForm, StTitle } from './LogIn.styled';
 
 export const LogIn = () => {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useInputs({
-    accountId: '',
+    email: '',
     password: ''
   });
+  const { mutateAsync: signIn } = useMutation({
+    mutationFn: () => signInWithSupabase(inputs),
+    onError: () => {
+      console.log('error');
+    },
+    onSuccess: () => {
+      alert('로그인 성공');
+      navigate('/');
+    }
+  });
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    // 서버로 요청 날리는 로직
+    const result = await signIn(inputs);
+    console.log(result);
   };
 
   return (
@@ -20,11 +35,11 @@ export const LogIn = () => {
         <StTitle>로그인</StTitle>
         <StForm onSubmit={handleSubmitForm}>
           <AuthInput
-            label="아이디"
-            name="accountId"
-            type="text"
-            placeholder="아이디를 입력해주세요"
-            value={inputs.accountId}
+            label="이메일"
+            name="email"
+            type="email"
+            placeholder="이메일을 입력해주세요"
+            value={inputs.email}
             onChange={setInputs}
           />
           <AuthInput
