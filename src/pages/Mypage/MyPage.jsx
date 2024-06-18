@@ -29,12 +29,14 @@ const MyPage = () => {
         <StyledProfilePic /*src={matchedUser && matchedUser.profile_image}*/ alt="Profile 이미지 사진" />
         <StyledProfileBox>
           {/* {<StyledProfileName>{matchedUser && matchedUser.username}</StyledProfileName> } */}
-          {<StyledProfileName>"닉네임"</StyledProfileName>}
+          <StyledProfileName>"닉네임"</StyledProfileName>
+          <div>좋아하는 게임: 브루마블</div>
           <StyledButton>
-            <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#a055ff"></Button>
+            <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#2D2D2DDD"></Button>
           </StyledButton>
         </StyledProfileBox>
       </StyledProfile>
+      <div>내가 쓴 글</div>
     </StyledSection>
   );
 };
@@ -48,7 +50,7 @@ const StyledSection = styled.section`
 const StyledProfile = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 1rem 0rem;
   width: 100%;
   height: 200px;
@@ -56,8 +58,8 @@ const StyledProfile = styled.div`
 `;
 
 const StyledProfilePic = styled.img`
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
   border-radius: 50%;
   background-color: #b1b2e2;
 `;
