@@ -7,22 +7,23 @@ import Button from '@/components/Button';
 
 function FixMyProfile() {
   //const { user, upProfile, upNickName } = useAuth();
+  const navigate = useNavigate();
 
   //테스트용 임의 유저정보
-  const user = {
+  const [user, setUser] = useState({
     nickName: '홍길동',
     email: 'qwer1234@gmail.com',
     profile: '',
     intro: '좋아하는 게임: 브루마블'
-  };
+  });
 
-  const navigate = useNavigate();
+  console.log(user);
 
   const [profileImage, setProfileImage] = useState('');
   const [profileName, setProfileName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [profileIntro, setProfileIntro] = useState('');
-  const [imgFile, setImgFile] = useState(null);
+  const [imgFile, setImgFile] = useState('');
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -52,34 +53,33 @@ function FixMyProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (imgFile) {
-      const picUpdate = {
-        file: imgFile,
-        email: userEmail
-      };
+    const updatingObj = {};
 
-      setProfileImage(picUpdate);
+    if (!profileName) {
+      return alert('변경된 것이 없습니다!');
     }
 
-    if (!profileName) return alert('변경된 것이 없습니다!');
-
-    const nickUpdate = {
-      nickName: profileName,
-      email: userEmail
-    };
-
-    setProfileName(nickUpdate);
-
-    if (profileIntro) {
-      const introUpdate = {
-        intro: profileIntro,
-        email: userEmail
-      };
-
-      setProfileIntro(introUpdate);
+    if (profileName !== user.nickName) {
+      updatingObj.nickName = profileName;
+      setProfileName(profileName);
     }
 
-    console.log(user);
+    if (profileIntro !== user.intro) {
+      updatingObj.intro = profileIntro;
+      setProfileIntro(profileIntro);
+    }
+
+    if (imgFile !== user.profile) {
+      updatingObj.profile = imgFile;
+    }
+
+    console.log(updatingObj);
+    // setUser({
+    //   nickName: profileName,
+    //   email: 'qwer1234@gmail.com',
+    //   profile: imgFile,
+    //   intro: profileIntro
+    // });
   };
 
   const handleBackClick = () => {
@@ -101,7 +101,7 @@ function FixMyProfile() {
         <ImageBox>
           <img
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            src={profileImage ? profileImage : user && user.profile}
+            src={profileImage ? profileImage : user.profile}
             alt="profile image"
           />
         </ImageBox>
@@ -116,14 +116,14 @@ function FixMyProfile() {
       <RightDiv>
         <Label>닉네임 변경하기</Label>
         <br />
-        <Input type="text" defaultValue={profileName} onChange={handleNameChange} />
+        <Input type="text" value={profileName} onChange={handleNameChange} />
         <br />
         <Label>한 줄 소개 변경하기</Label>
         <br />
-        <Input type="text" defaultValue={profileIntro} onChange={handleIntroChange} />
+        <Input type="text" value={profileIntro} onChange={handleIntroChange} />
         <Buttons>
-          <Button buttonText={'저장'} type={'button'} color="#2D2D2DDD" onClick={handleSubmit} />
-          <Button buttonText={'돌아가기'} type={'button'} color="#2D2D2DDD" onClick={handleBackClick} />
+          <Button buttonText={'저장'} type={'button'} color="2D2D2D" onClick={handleSubmit} />
+          <Button buttonText={'돌아가기'} type={'button'} color="2D2D2D" onClick={handleBackClick} />
         </Buttons>
       </RightDiv>
     </Section>
@@ -153,8 +153,8 @@ const RightDiv = styled.div`
 `;
 
 const ImageBox = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   border-radius: 70%;
   display: flex;
   justify-content: center;

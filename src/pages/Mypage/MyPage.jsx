@@ -29,10 +29,10 @@ const MyPage = () => {
         <StyledProfilePic /*src={matchedUser && matchedUser.profile_image}*/ alt="Profile 이미지 사진" />
         <StyledProfileBox>
           {/* {<StyledProfileName>{matchedUser && matchedUser.username}</StyledProfileName> } */}
-          <StyledProfileName>"닉네임"</StyledProfileName>
-          <div>좋아하는 게임: 브루마블</div>
+          <StyledProfileName>닉네임</StyledProfileName>
+          <StyledProfileIntro>좋아하는 게임: 브루마블</StyledProfileIntro>
           <StyledButton>
-            <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#2D2D2DDD"></Button>
+            <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#2D2D2D"></Button>
           </StyledButton>
         </StyledProfileBox>
       </StyledProfile>
@@ -45,6 +45,7 @@ const StyledSection = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: #fcfdff;
 `;
 
 const StyledProfile = styled.div`
@@ -52,14 +53,15 @@ const StyledProfile = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem 0rem;
-  width: 100%;
+  width: 70%;
   height: 200px;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid #fcfdff;
+  box-shadow: 0px 1px 1px 0px;
 `;
 
 const StyledProfilePic = styled.img`
-  height: 200px;
-  width: 200px;
+  height: 170px;
+  width: 170px;
   border-radius: 50%;
   background-color: #b1b2e2;
 `;
@@ -71,9 +73,17 @@ const StyledProfileBox = styled.div`
   margin-left: 2rem;
 `;
 
-const StyledButton = styled.div`
-  margin-top: 0.3rem;
+const StyledProfileIntro = styled.div`
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 `;
+
 const StyledProfileName = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
@@ -85,6 +95,11 @@ const StyledProfileName = styled.div`
   text-overflow: ellipsis;
   white-space: normal;
 `;
+
+const StyledButton = styled.div`
+  margin-top: 0.3rem;
+`;
+
 const StyledUl = styled.ul`
   width: 100%;
   margin-top: 100px;
