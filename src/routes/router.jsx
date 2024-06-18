@@ -1,3 +1,4 @@
+import FeedWrite from '@/pages/FeedWrite/FeedWrite';
 import Layout from '@/Layouts/Layout';
 import CrudTest from '@/pages/CrudTest/CrudTest';
 import { Home } from '@/pages/Home';
@@ -13,5 +14,6 @@ export const router = createBrowserRouter([
   {
     path: '/crudtest',
     element: <CrudTest />
-  }
+  },
+  { path: '/writingpage', element: <FeedWrite /> }
 ]);
