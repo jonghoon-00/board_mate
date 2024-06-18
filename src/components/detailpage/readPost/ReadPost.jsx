@@ -1,13 +1,11 @@
+import Comments from '../coments/Comments';
 import {
   StButtonDiv,
-  StCommentSaveButton,
   StContentSection,
   StRecruitButton,
   StSubSection,
-  StTextArea,
   StTitleH1,
-  StTitleSection,
-  StWriteCommentSection
+  StTitleSection
 } from './readPost.styled';
 
 const ReadPost = ({ setIsEdit, targetData }) => {
@@ -32,12 +30,7 @@ const ReadPost = ({ setIsEdit, targetData }) => {
       </StContentSection>
 
       <hr />
-      <StWriteCommentSection>
-        {/* TODO comments 테이블에서 해당 게시물 아이디의 항목 몇개인지 받아오기 */}
-        <p>n개의 댓글</p>
-        <StTextArea type="text" placeholder="댓글을 입력해주세요" />
-        <StCommentSaveButton>저장</StCommentSaveButton>
-      </StWriteCommentSection>
+      <Comments />
     </>
   );
 };

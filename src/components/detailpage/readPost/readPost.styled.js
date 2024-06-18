@@ -39,18 +39,3 @@ export const StContentSection = styled.div`
     margin-top: 2rem;
   }
 `;
-
-export const StWriteCommentSection = styled.div`
-  width: 100%;
-  height: 20vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-export const StTextArea = styled.textarea`
-  resize: none;
-  height: 6vh;
-`;
-export const StCommentSaveButton = styled.button`
-  margin: 1rem 0 1rem 90%;
-`;
