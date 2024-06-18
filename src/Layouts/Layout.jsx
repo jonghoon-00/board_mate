@@ -26,19 +26,20 @@ function Layout() {
 
 const StBackground = styled.section`
   background-color: #fcfdff;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
 
 const StHeader = styled.section`
-  height: 5rem;
+  height: 100px;
   background-color: #2d2d2d;
   color: #fcfdff;
   display: flex;
   align-items: center;
   padding: 5px 20px 5px 20px;
+  box-sizing: border-box;
 `;
 
 // 높이 100px 하려고 했는데 못생겨서 75px 정도로 변경

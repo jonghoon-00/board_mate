@@ -11,12 +11,18 @@ export const Home = () => {
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
             <StCards>
               <StCard>
-                <StCardImg />
+                <>
+                  <StCardImg />
+                  <StTitle>제목</StTitle>
+                  <StPlace>장소</StPlace>
+                </>
+                <StPostItem>모집중</StPostItem>
+              </StCard>
+              <StCard>
                 <StTitle>제목</StTitle>
                 <StPlace>장소</StPlace>
                 <StPostItem>모집중</StPostItem>
               </StCard>
-              <StCard>카드~</StCard>
               <StCard>카드~</StCard>
               <StCard>카드~</StCard>
             </StCards>
@@ -28,7 +34,7 @@ export const Home = () => {
 };
 
 const StHomeSection = styled.section`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -49,7 +55,8 @@ const StCardsSection = styled.section`
 `;
 
 const StCardsCotainer = styled.div`
-  width: 80vw;
+  width: 1240px;
+  background-color: gray;
 `;
 
 const StCardsAlignBtn = styled.button`
@@ -67,42 +74,46 @@ const StCards = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(33.3%, auto));
-  grid-auto-rows: minmax(25rem, 0);
-  row-gap: 2rem;
+  grid-auto-rows: minmax(323px, 0);
+  row-gap: 1rem;
 `;
 
 const StCard = styled.div`
-  background-color: gray;
-  width: 30rem;
-  height: 25rem;
+  background-color: #fcfdff;
+  width: 380px;
+  height: 323px;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  margin: 0 auto 0 auto;
+  /* margin: 0 auto 0 auto; */
   gap: 0.5rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  box-sizing: border-box;
 `;
 
 const StCardImg = styled.div`
   background-color: black;
-  width: 28rem;
-  height: 16rem;
-  margin: 1rem auto 0.5rem auto;
+  width: 340px;
+  height: 200px;
   border-radius: 0.5rem;
 `;
 
 const StTitle = styled.p`
-  margin-left: 1rem;
   font-size: 2rem;
 `;
 
 const StPlace = styled.p`
-  margin-left: 1rem;
   font-size: 1.5rem;
 `;
 
 const StPostItem = styled.div`
   background-color: #2d2d2d;
   color: #fcfdff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0 0 auto;
   width: 5.5rem;
   height: 1.7rem;
   border-radius: 0.5rem;
