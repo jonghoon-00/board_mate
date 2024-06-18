@@ -59,12 +59,13 @@ const imgsrc =
 
 const StNoneBodyBtn = styled.button`
   margin: 0.2rem;
-  width: 5rem;
+  width: 6rem;
   height: 2.2rem;
   border-radius: 0.5rem;
   color: #fcfdff;
   background-color: transparent;
   border: none;
+  font-size: 16px;
   font-weight: 700;
 `;
 
@@ -73,12 +74,13 @@ const StSignDiv = styled.div`
 `;
 
 const StSignBtn = styled.button`
-  width: 6.5rem;
+  width: 7rem;
   height: 2.2rem;
   margin-right: 0.2rem;
   border-radius: 0.5rem;
   background-color: #fcfdff;
   color: #2d2d2d;
+  font-size: 16px;
   font-weight: 700;
 `;
 

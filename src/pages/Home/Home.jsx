@@ -73,9 +73,10 @@ const StCardsAlignBtn = styled.button`
 const StCards = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(33.3%, auto));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 380px));
   grid-auto-rows: minmax(323px, 0);
-  row-gap: 1rem;
+  justify-content: space-between;
+  row-gap: 60px;
 `;
 
 const StCard = styled.div`
