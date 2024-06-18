@@ -1,5 +1,5 @@
-import { StDiv } from './Home.styled';
 import styled from 'styled-components';
+import { StDiv } from './Home.styled';
 
 export const Home = () => {
   return (
