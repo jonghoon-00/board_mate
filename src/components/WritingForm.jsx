@@ -79,27 +79,8 @@ function WritingForm() {
         placeholder="내용을 작성해 주세요 ..."
       />
 
-      <Map // 로드뷰를 표시할 Container
-        center={{
-          lat: mapInfo.y,
-          lng: mapInfo.x
-        }}
-        style={{
-          width: '100%',
-          height: '700px'
-        }}
-        level={3}
-        draggable={false}
-        zoomable={false}
-      >
-        <MapMarker // 마커를 생성합니다
-          position={{
-            // 마커가 표시될 위치입니다
-            lat: mapInfo.y,
-            lng: mapInfo.x
-          }}
-        />
-      </Map>
+      <StMapApi>지도api</StMapApi>
+
       <StLine />
       <StButtonContainer>
         <StBackButton>
@@ -175,6 +156,10 @@ const StLabel = styled.label`
 const StInput = styled.input`
   display: none;
   width: 100%;
+`;
+
+const StMapApi = styled.div`
+  height: 244px;
 `;
 
 const StLine = styled.div`

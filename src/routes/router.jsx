@@ -14,7 +14,16 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 export const router = createBrowserRouter([
-  { path: '', element: <Home /> },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '',
+        element: <Home />
+      }
+    ]
+  },
   {
     path: '/',
     element: (
