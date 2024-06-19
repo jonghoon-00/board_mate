@@ -3,15 +3,17 @@ import CrudTest from '@/pages/CrudTest/CrudTest';
 import { getSessionWithSupabase } from '@/api/api.auth';
 import { Home } from '@/pages/Home';
 import { LogIn } from '@/pages/LogIn';
-import { SignUp } from '@/pages/SignUp';
-import { Detail } from '@/pages/detail';
+import { SelectPlace } from '@/pages/SelectPlace';
+import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { FeedWrite } from '@/pages/FeedWrite/FeedWrite';
+import { Detail } from '@/pages/detail';
 
 export const router = createBrowserRouter([
   { path: '', element: <Home /> },
+  { path: '/select-place', element: <SelectPlace /> },
   {
     path: '/',
     element: (
