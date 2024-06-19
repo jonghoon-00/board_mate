@@ -11,25 +11,17 @@ import {
   StyledProfileBox
 } from './FixMyProfile.styled';
 import Button from './Button';
+import supabase from '@/supabase/supabaseClient';
+import { useQuery } from '@tanstack/react-query';
+import { getUser } from '@/api/api.auth';
 
 function FixMyProfile() {
-  //const { user, upProfile, upNickName } = useAuth();
   const navigate = useNavigate();
-
-  //테스트용 임의 유저정보
-  const [user, setUser] = useState({
-    nickName: '홍길동',
-    email: 'qwer1234@gmail.com',
-    profile: '',
-    intro: '브루마블'
-  });
-
-  console.log(user);
 
   const [profileImage, setProfileImage] = useState('');
   const [profileName, setProfileName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [profileIntro, setProfileIntro] = useState('');
+  const [userId, setUserId] = useState('');
+  const [profileFavorite, setProfileFavorite] = useState('');
 
   const handleImageChange = (e) => {
     setProfileImage(e.target.files[0]);
@@ -39,13 +31,17 @@ function FixMyProfile() {
     setProfileName(e.target.value);
   };
 
-  const handleIntroChange = (e) => {
-    setProfileIntro(e.target.value);
+  const handleFavoriteChange = (e) => {
+    setProfileFavorite(e.target.value);
   };
 
   // 닉네임, 프로필사진 변경
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const avatar = 'profile_image';
+    const FILE_NAME = 'profileImage';
+    const fileUrl = `${FILE_NAME}_${user.id}`;
 
     const updatingObj = {};
 
@@ -53,26 +49,30 @@ function FixMyProfile() {
       return alert('변경된 것이 없습니다!');
     }
 
-    if (profileName !== user.nickName) {
-      updatingObj.nickName = profileName;
+    if (profileName !== user.nickname) {
+      updatingObj.nickname = profileName;
       setProfileName(profileName);
     }
 
-    if (profileIntro !== user.intro) {
-      updatingObj.intro = profileIntro;
-      setProfileIntro(profileIntro);
+    if (profileFavorite !== user.intro) {
+      updatingObj.intro = profileFavorite;
+      setProfileFavorite(profileFavorite);
     }
 
     if (profileImage !== user.profile) {
       updatingObj.profile = profileImage;
       setProfileImage(profileImage);
+      const response = await supabase.storage.from('avatars').upload(fileUrl, profileImage);
+      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl);
+      console.log(response);
+      console.log(publicUrl);
     }
 
-    console.log(updatingObj);
+    console.log('updatingObj =', updatingObj);
 
     // setUser({
     //   nickName: profileName,
-    //   email: 'qwer1234@gmail.com',
+    //   id: 'qwer1234@gmail.com',
     //   profile: profileImage,
     //   intro: profileIntro
     // });
@@ -83,12 +83,25 @@ function FixMyProfile() {
     navigate('/my-page');
   };
 
+  const {
+    data: user,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser
+  });
+
+  if (isPending) return <div>Loading...</div>;
+
+  console.log(user);
+
   useEffect(() => {
     if (user) {
-      setProfileImage(user.profile);
-      setProfileName(user.nickName);
-      setUserEmail(user.email);
-      setProfileIntro(user.intro);
+      setProfileImage(user.image_url);
+      setProfileName(user.nickname);
+      setUserId(user.id);
+      setProfileFavorite(user.favorite);
     }
   }, [user]);
 
@@ -116,7 +129,7 @@ function FixMyProfile() {
             닉네임 <input type="text" value={profileName} onChange={handleNameChange} />
           </StLabelNick>
           <StLabelGame>
-            좋아하는 게임 <input type="text" value={profileIntro} onChange={handleIntroChange} />
+            좋아하는 게임 <input type="text" value={profileFavorite} onChange={handleFavoriteChange} />
           </StLabelGame>
         </StyledProfileBox>
         <StButtons>

@@ -18,37 +18,38 @@ import {
   StyledSection
 } from './MyPage.styled';
 import Button from './Button';
+import { useQuery } from '@tanstack/react-query';
+import { getUser } from '@/api/api.auth';
 
 const MyPage = () => {
-  // const { blogs } = useBlogs();
-  // const { userInfo } = useAuth();
   const navigate = useNavigate();
-  // const location = useLocation();
-  //   const { email } = location.state;
-  //   const [matchedUser, setMatchedUser] = useState(null);
 
   const onClickProfile = () => {
     navigate('/fix-my-profile');
   };
 
-  //   const filteredBlogs = blogs.filter((blog) => blog.user_id === email);
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       const matchedUser = userInfo.find((user) => user.email === email);
-  //       setMatchedUser(matchedUser);
-  //     }
-  //   }, [userInfo, email]);
+  const {
+    data: user,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser
+  });
+
+  console.log(user);
+
+  if (isPending) return <div>Loading...</div>;
 
   return (
     <StyledSection>
       <StyledProfile>
-        <StyledProfilePic /*src={matchedUser && matchedUser.profile_image}*/ alt="Profile 이미지 사진" />
+        <StyledProfilePic src={user.image_url} alt="" />
         <StyledProfileBox>
-          {/* {<StyledProfileName>{matchedUser && matchedUser.username}</StyledProfileName> } */}
-          <StyledProfileName>닉네임들어갈곳</StyledProfileName>
+          <StyledProfileName>{user.nickname}</StyledProfileName>
           <StyledProfileIntro>
             <span>좋아하는 게임 </span>
-            <StyledProfileGame>브루마블</StyledProfileGame>
+            <StyledProfileGame>{user.favorite}</StyledProfileGame>
           </StyledProfileIntro>
         </StyledProfileBox>
         <StButton>
