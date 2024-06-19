@@ -17,7 +17,9 @@ export const Home = () => {
   return (
     <StDiv>
       <StHomeSection>
-        <StSlideSection>슬라이드 아이템 들어가는 곳</StSlideSection>
+        <StSlideSection>
+          <img src={'../../assets/mainitem.png'} />
+        </StSlideSection>
         <StCardsSection>
           <StCardsCotainer>
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
@@ -61,8 +63,7 @@ const StHomeSection = styled.section`
 `;
 
 const StSlideSection = styled.section`
-  height: 500px;
-  background-color: pink;
+  height: 700px;
   display: flex;
   justify-content: center;
 `;
