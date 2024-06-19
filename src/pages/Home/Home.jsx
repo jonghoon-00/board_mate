@@ -3,6 +3,7 @@ import { StDiv } from './Home.styled';
 import styled from 'styled-components';
 import { getPosts } from '@/api/api.posts';
 import { Link } from 'react-router-dom';
+import img from '@/assets/mainitem.png';
 
 export const Home = () => {
   const {
@@ -18,7 +19,7 @@ export const Home = () => {
     <StDiv>
       <StHomeSection>
         <StSlideSection>
-          <img src={'../../assets/mainitem.png'} />
+          <img src={img} />
         </StSlideSection>
         <StCardsSection>
           <StCardsCotainer>
