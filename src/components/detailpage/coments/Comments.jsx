@@ -18,6 +18,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
 
   const { id: postId } = useParams();
 
+  //댓글 불러오기
   const {
     data: comments,
     isPending,
@@ -65,8 +66,14 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
       ...comment,
       content: newContent
     });
+    setEditingCommentId(null);
     setCommentIsEdit(false);
-    setEditingCommentId(comment.id);
+  };
+
+  const nowEditHandler = (commentId) => {
+    console.log(commentId);
+    setEditingCommentId(commentId);
+    setCommentIsEdit(true);
   };
 
   return (
@@ -91,7 +98,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
                   <p>닉네임</p>
                   <p>{comment.created_at}</p>
                 </StCommentWriterInfo>
-                {!commentIsEdit && editingCommentId === comment.id ? (
+                {commentIsEdit && editingCommentId === comment.id ? (
                   <input
                     value={newContent}
                     onChange={(e) => setNewContent(e.target.value)}
@@ -102,12 +109,12 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
                 )}
                 <div>
                   {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
-                  {!commentIsEdit && editingCommentId === comment.id ? (
+                  {commentIsEdit && editingCommentId === comment.id ? (
                     <button type="button" onClick={() => updateCommentHandler(comment)}>
                       완료
                     </button>
                   ) : (
-                    <button type="button" onClick={() => setCommentIsEdit(true)}>
+                    <button type="button" onClick={() => nowEditHandler(comment.id)}>
                       수정
                     </button>
                   )}

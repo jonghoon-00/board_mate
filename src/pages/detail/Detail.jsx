@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StContainer } from './detail.styled';
 
-const Detail = () => {
+export const Detail = () => {
   const [isEdit, setIsEdit] = useState(false);
-
   const [targetData, setTargetData] = useState({});
   const postId = useParams().id;
 
@@ -29,5 +28,3 @@ const Detail = () => {
     </StContainer>
   );
 };
-
-export default Detail;
