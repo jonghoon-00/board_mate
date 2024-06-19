@@ -1,9 +1,16 @@
-import getDataUrl from '@/utils/getDataUrl';
-import resizeAndConvertImage from '@/utils/resizeAndConvertImg';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Button from '@/components/Button';
+import {
+  StButtons,
+  StFixSection,
+  StLabelGame,
+  StLabelNick,
+  StProfilePicBox,
+  StProfilePics,
+  StyFixProfile,
+  StyledProfileBox
+} from './FixMyProfile.styled';
+import Button from './Button';
 
 function FixMyProfile() {
   //const { user, upProfile, upNickName } = useAuth();
@@ -23,22 +30,9 @@ function FixMyProfile() {
   const [profileName, setProfileName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [profileIntro, setProfileIntro] = useState('');
-  const [imgFile, setImgFile] = useState('');
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        const convertedImg = await resizeAndConvertImage(file);
-        const base64 = await getDataUrl(file);
-
-        console.log(convertedImg);
-        setProfileImage(base64);
-        setImgFile(convertedImg);
-      } catch (error) {
-        console.error('이미지 가져오기에 실패하였습니다.', error);
-      }
-    }
+  const handleImageChange = (e) => {
+    setProfileImage(e.target.files[0]);
   };
 
   const handleNameChange = (e) => {
@@ -69,21 +63,24 @@ function FixMyProfile() {
       setProfileIntro(profileIntro);
     }
 
-    if (imgFile !== user.profile) {
-      updatingObj.profile = imgFile;
+    if (profileImage !== user.profile) {
+      updatingObj.profile = profileImage;
+      setProfileImage(profileImage);
     }
 
     console.log(updatingObj);
+
     // setUser({
     //   nickName: profileName,
     //   email: 'qwer1234@gmail.com',
-    //   profile: imgFile,
+    //   profile: profileImage,
     //   intro: profileIntro
     // });
+    // console.log(user);
   };
 
   const handleBackClick = () => {
-    navigate('/MyPage');
+    navigate('/my-page');
   };
 
   useEffect(() => {
@@ -102,7 +99,7 @@ function FixMyProfile() {
           <StProfilePicBox>
             <img
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              src={profileImage ? profileImage : user.profile}
+              src={profileImage ? URL.createObjectURL(profileImage) : ''}
               alt="profile image"
             />
           </StProfilePicBox>
@@ -131,83 +128,4 @@ function FixMyProfile() {
   );
 }
 
-const StFixSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyFixProfile = styled.section`
-  width: 920px;
-  height: 240px;
-  padding: 16px;
-  margin-top: 60px;
-  border-radius: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: #fcfdff;
-  display: flex;
-`;
-
-const StProfilePics = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin: auto 0 auto 80px;
-`;
-
-const StProfilePicBox = styled.div`
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  background-color: #f0f0f0;
-  overflow: hidden;
-`;
-
-const StyledProfileBox = styled.div`
-  width: 400px;
-  gap: 45px;
-  display: flex;
-  flex-direction: column;
-  margin: auto 0 auto 30px;
-`;
-
-const StLabelNick = styled.label`
-  width: 100%;
-  font-size: 24px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  & input {
-    border: none;
-    margin-left: 10px;
-    font-size: 24px;
-  }
-`;
-
-const StLabelGame = styled.label`
-  width: 100%;
-  font-size: 20px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  & input {
-    border: none;
-    margin-left: 10px;
-    min-width: 50px;
-    max-width: 210px;
-    font-size: 20px;
-  }
-`;
-
-const StButtons = styled.div`
-  margin: 0 0 auto auto;
-  display: flex;
-  gap: 10px;
-`;
-
-export default FixMyProfile;
+export { FixMyProfile };
