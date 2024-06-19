@@ -17,6 +17,7 @@ export const router = createBrowserRouter([
         path: 'detail/:id',
         element: <Detail />
       },
+      { path: '/MyPage', element: <MyPage /> },
       { path: '/fix-my-profile', element: <FixMyProfile /> }
     ]
   }
