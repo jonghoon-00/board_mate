@@ -8,8 +8,19 @@ import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+<<<<<<< HEAD
+import { MyPage } from '@/pages/Mypage/MyPage';
+import { FixMyProfile } from '@/pages/Mypage/FixMyProfile';
+import { Detail } from '@/pages/detail';
+=======
+<<<<<<< HEAD
+import MyPage from '@/pages/MyPage/MyPage';
+import FixMyProfile from '@/pages/MyPage/FixMyProfile';
+=======
 import { FeedWrite } from '@/pages/FeedWrite/FeedWrite';
 import { Detail } from '@/pages/detail';
+>>>>>>> 51f1a3ad590addbfc2d1eb1f3a6e608ce9bf06f4
+>>>>>>> dev
 
 export const router = createBrowserRouter([
   { path: '', element: <Home /> },
@@ -23,18 +34,29 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+<<<<<<< HEAD
+        path: 'my-page',
+        element: <MyPage />
+=======
         path: 'my-page'
         // element: <MyPage />
+>>>>>>> 51f1a3ad590addbfc2d1eb1f3a6e608ce9bf06f4
       },
       {
         path: 'detail/:id',
         element: <Detail />
       },
       {
+<<<<<<< HEAD
+        path: 'fix-my-profile',
+        element: <FixMyProfile />
+      }
+=======
         path: 'fix-my-profile'
         // element: <FixMyProfile />
       },
       { path: 'writingpage', element: <FeedWrite /> }
+>>>>>>> 51f1a3ad590addbfc2d1eb1f3a6e608ce9bf06f4
     ],
     loader: getSessionWithSupabase
   },
