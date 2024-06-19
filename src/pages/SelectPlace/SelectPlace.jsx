@@ -5,6 +5,7 @@ import {
   StButtons,
   StDiv,
   StDummyImage,
+  StInfoPreview,
   StInfoWindow,
   StLeftSide,
   StLi,
@@ -154,12 +155,12 @@ export const SelectPlace = () => {
         </Map>
       </StDiv>
       {info && (
-        <InfoPreview>
+        <StInfoPreview>
           <span>"Info" state 정보</span>
           <hr />
           <div>장소 : {info.content}</div>
           <div>ID : {info.id}</div>
-        </InfoPreview>
+        </StInfoPreview>
       )}
     </>
   );

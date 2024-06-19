@@ -11,14 +11,13 @@ export const StContainer = styled.div`
 `;
 
 export const StTitleSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
   height: 60px;
 `;
 export const StTitleH1 = styled.h1`
   font-size: 3rem;
   font-weight: 700;
+  white-space: normal;
+  word-wrap: break-word;
 `;
 export const StRecruitButton = styled.button`
   width: 90px;
@@ -29,6 +28,7 @@ export const StRecruitButton = styled.button`
   border: 2px solid #f2b564;
   font-size: 14px;
   font-weight: 700;
+  margin-bottom: 20px;
 `;
 
 export const StSubSection = styled.div`
@@ -60,6 +60,10 @@ export const StContentSection = styled.div`
   min-height: 40vh;
   & p {
     padding: 20px 0 20px 0;
+    word-wrap: break-word;
+  }
+  img {
+    width: 100%;
   }
 `;
 
