@@ -23,7 +23,6 @@ const CrudTest = () => {
   });
 
   const addPostHandler = () => {
-    // 실제 코드에서는 다 새로 받아와야함
     addMutation.mutate({
       id: uuidv4(),
       address: 'create test address',

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { StDiv } from './Home.styled';
 import styled from 'styled-components';
 import { getPosts } from '@/api/api.posts';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const {
@@ -12,7 +13,6 @@ export const Home = () => {
     queryKey: ['posts'],
     queryFn: getPosts
   });
-  console.log(posts);
 
   return (
     <StDiv>
@@ -22,33 +22,28 @@ export const Home = () => {
           <StCardsCotainer>
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
             <StCards>
-              {posts &&
+              {posts && posts.length ? (
                 posts.map((post) => {
                   return (
                     <StCard key={post.id}>
-                      <StCardImg />
+                      {/* <Link to={`/detail/${post.id}`}> */}
+                      {post.image_url && <StCardImg src={post.image_url} />}
                       <StTitle>{post.title}</StTitle>
                       <StPlace>{post.address}</StPlace>
-                      <StContent>{post.content}</StContent>
+                      {post.image_url ? (
+                        <StContent>{post.content}</StContent>
+                      ) : (
+                        <StContentNoImg>{post.content}</StContentNoImg>
+                      )}
+
                       <StPostItem>모집중</StPostItem>
+                      {/* </Link> */}
                     </StCard>
                   );
-                })}
-              {/* <StCard>
-                <>
-                  <StCardImg />
-                  <StTitle>제목</StTitle>
-                  <StPlace>장소</StPlace>
-                </>
-                <StPostItem>모집중</StPostItem>
-              </StCard>
-              <StCard>
-                <StTitle>제목</StTitle>
-                <StPlace>장소</StPlace>
-                <StPostItem>모집중</StPostItem>
-              </StCard>
-              <StCard>카드~</StCard>
-              <StCard>카드~</StCard> */}
+                })
+              ) : (
+                <div>안녕</div>
+              )}
             </StCards>
           </StCardsCotainer>
         </StCardsSection>
@@ -79,8 +74,9 @@ const StCardsSection = styled.section`
 `;
 
 const StCardsCotainer = styled.div`
-  width: 1240px;
-  background-color: gray;
+  min-width: 1000px;
+  margin-bottom: 10px;
+  /* background-color: gray; */
 `;
 
 const StCardsAlignBtn = styled.button`
@@ -97,7 +93,7 @@ const StCardsAlignBtn = styled.button`
 const StCards = styled.ul`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 380px));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 320px));
   grid-auto-rows: minmax(323px, 0);
   justify-content: space-between;
   row-gap: 60px;
@@ -105,7 +101,7 @@ const StCards = styled.ul`
 
 const StCard = styled.li`
   background-color: #fcfdff;
-  width: 380px;
+  width: 320px;
   height: 323px;
   border-radius: 1rem;
   display: flex;
@@ -117,15 +113,22 @@ const StCard = styled.li`
   box-sizing: border-box;
 `;
 
-const StCardImg = styled.div`
+const StCardImg = styled.img`
   background-color: black;
   width: 100%;
-  height: 200px;
+  height: 160px;
   border-radius: 0.5rem;
+  object-fit: cover;
 `;
 
 const StTitle = styled.p`
   font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; // 원하는 라인수
+  -webkit-box-orient: vertical;
 `;
 
 const StPlace = styled.p`
@@ -133,7 +136,25 @@ const StPlace = styled.p`
 `;
 
 const StContent = styled.p`
+  line-height: 1.5;
   font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; // 원하는 라인수
+  -webkit-box-orient: vertical;
+`;
+
+const StContentNoImg = styled.p`
+  line-height: 1.5;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; // 원하는 라인수
+  -webkit-box-orient: vertical;
 `;
 
 const StPostItem = styled.div`

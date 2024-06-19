@@ -17,3 +17,9 @@ export async function deletePost(postId) {
 export async function updatePost(updatePost) {
   await supabase.from('posts').update(updatePost).eq('id', updatePost.id);
 }
+
+export async function addImage(fileObj) {
+  const { data, error } = await supabase.storage.from('post_images').upload(`post_${Date.now()}.png`, fileObj);
+  if (error) alert('업로드에 실패했습니다.');
+  return data;
+}

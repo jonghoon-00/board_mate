@@ -1,13 +1,63 @@
-import React from 'react';
+import { addImage, addPost } from '@/api/api.posts';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 function WritingForm() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    const fileObj = e.target.files[0];
+    const data = await addImage(fileObj);
+    console.log(data.path);
+    setImageUrl(`https://hiovftevpmlwqfamjnpe.supabase.co/storage/v1/object/public/post_images/${data.path}`);
+  };
+
+  // add mutation 로직
+  const addMutation = useMutation({
+    mutationFn: addPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+      navigate('/');
+    }
+  });
+
+  const addPostHandler = () => {
+    addMutation.mutate({
+      id: uuidv4(),
+      address: 'create test address',
+      title,
+      content,
+      image_url: imageUrl,
+      is_recruit: false,
+      user_id: uuidv4()
+    });
+  };
   return (
     <StContainer>
-      <StTitleInput placeholder="제목을 입력하세요" />
+      <StTitleInput
+        value={title}
+        onChange={(e) => {
+          setTitle(e.target.value);
+        }}
+        placeholder="제목을 입력하세요"
+      />
       <StLabel htmlFor="image">이미지 첨부하기</StLabel>
-      <StInput type="file" id="image" />
-      <StTextArea placeholder="내용을 작성해 주세요 ..." />
+      <StInput type="file" id="image" onChange={handleImageUpload} />
+      <StTextArea
+        value={content}
+        onChange={(e) => {
+          setContent(e.target.value);
+        }}
+        placeholder="내용을 작성해 주세요 ..."
+      />
 
       <StMapApi>지도api</StMapApi>
 
@@ -19,7 +69,7 @@ function WritingForm() {
           </svg>
           나가기
         </StBackButton>
-        <StAddButton>등록하기</StAddButton>
+        <StAddButton onClick={addPostHandler}>등록하기</StAddButton>
       </StButtonContainer>
     </StContainer>
   );
