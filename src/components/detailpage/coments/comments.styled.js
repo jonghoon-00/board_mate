@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
 export const StCommentFormSection = styled.form`
-<<<<<<< HEAD
   height: auto;
   box-sizing: border-box;
-=======
   width: 650px;
-  height: 180px;
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
   margin: 0 auto;
   padding: 1.2rem 1rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -25,11 +21,6 @@ export const StTextArea = styled.textarea`
   height: 6vh;
 `;
 
-<<<<<<< HEAD
-=======
-// 댓글 입력란 placeholder 부분 글자 색이 변경이 안됨
-
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
 export const StCommentSaveButton = styled.button`
   width: 90px;
   height: 32px;
@@ -51,12 +42,8 @@ export const StCommentList = styled.div`
 
 export const StCommentWriterInfo = styled.div`
   display: flex;
-<<<<<<< HEAD
   flex-direction: column;
   justify-content: end;
-=======
-  align-items: end;
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
   & p {
     font-size: 1rem;
     font-weight: bold;
@@ -69,6 +56,7 @@ export const StCommentP = styled.p`
 
 export const StCommentUDBtns = styled.div`
   margin-left: auto;
+  /* box-sizing: border-box; */
   & button {
     width: 80px;
     height: 25px;
@@ -79,11 +67,6 @@ export const StCommentUDBtns = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-=======
-// 갭이 왜 안먹냐 ... ?
-
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
 export const StCommentCard = styled.section`
   width: 650px;
   height: 180px;

@@ -3,13 +3,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  StCommentCard,
   StCommentFormSection,
   StCommentList,
   StCommentSaveButton,
   StCommentWriterInfo,
-  StTextArea,
-  StCommentCard,
-  StCommentUDBtns
+  StTextArea
 } from './comments.styled';
 
 const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
@@ -79,7 +78,6 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
   };
 
   return (
-<<<<<<< HEAD
     <StCommentFormSection onSubmit={addComment}>
       {/* TODO comments 테이블에서 해당 postId의 항목 몇개인지 받아오기 */}
       <p>{comments?.length}개의 댓글</p>
@@ -91,20 +89,6 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
       />
       <StCommentSaveButton type="submit">저장</StCommentSaveButton>
 
-=======
-    <>
-      <StCommentFormSection onSubmit={addComment}>
-        {/* TODO comments 테이블에서 해당 postId의 항목 몇개인지 받아오기 */}
-        <p style={{ color: '#495057', fontWeight: 700 }}>n개의 댓글</p>
-        <StTextArea
-          type="text"
-          placeholder="댓글을 입력해주세요"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <StCommentSaveButton>저장</StCommentSaveButton>
-      </StCommentFormSection>
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
       <StCommentList>
         <ul>
           {comments?.map((comment) => {
@@ -116,13 +100,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
                     <p>닉네임</p>
                     <p>{comment.created_at}</p>
                   </div>
-                  <StCommentUDBtns>
-                    {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
-                    <button>수정</button>
-                    <button>삭제</button>
-                  </StCommentUDBtns>
                 </StCommentWriterInfo>
-<<<<<<< HEAD
                 {commentIsEdit && editingCommentId === comment.id ? (
                   <input
                     value={newContent}
@@ -153,16 +131,12 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
                     </button>
                   )}
                 </div>
-              </li>
-=======
-                <StCommentP>{comment.comment}</StCommentP>
               </StCommentCard>
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
             );
           })}
         </ul>
       </StCommentList>
-    </>
+    </StCommentFormSection>
   );
 };
 

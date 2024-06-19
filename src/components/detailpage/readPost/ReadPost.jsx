@@ -37,12 +37,8 @@ const ReadPost = ({ setIsEdit, targetData }) => {
         <Hr />
       </StContainer>
 
-<<<<<<< HEAD
       <hr />
       <Comments setCommentIsEdit={setCommentIsEdit} commentIsEdit={commentIsEdit} />
-=======
-      <Comments />
->>>>>>> 4464750c755971de689f5ec54e10f2e98213d063
     </>
   );
 };
