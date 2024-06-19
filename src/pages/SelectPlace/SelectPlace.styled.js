@@ -158,7 +158,7 @@ export const StInfoWindow = styled.div`
   }
 `;
 
-export const InfoPreview = styled.div`
+export const StInfoPreview = styled.div`
   border: 1px solid #c0c0c0;
   border-radius: 10px;
   padding: 10px;
