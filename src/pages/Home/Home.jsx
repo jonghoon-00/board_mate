@@ -1,6 +1,7 @@
 import { getPosts } from '@/api/api.posts';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import img from '@/assets/mainitem.png';
 import styled from 'styled-components';
 import { StDiv } from './Home.styled';
 
@@ -17,7 +18,9 @@ export const Home = () => {
   return (
     <StDiv>
       <StHomeSection>
-        <StSlideSection>슬라이드 아이템 들어가는 곳</StSlideSection>
+        <StSlideSection>
+          <img src={img} />
+        </StSlideSection>
         <StCardsSection>
           <StCardsCotainer>
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
@@ -61,8 +64,7 @@ const StHomeSection = styled.section`
 `;
 
 const StSlideSection = styled.section`
-  height: 500px;
-  background-color: pink;
+  height: 700px;
   display: flex;
   justify-content: center;
 `;
