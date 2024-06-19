@@ -1,24 +1,58 @@
-import FeedWrite from '@/pages/FeedWrite/FeedWrite';
 import Layout from '@/Layouts/Layout';
+import { getSessionWithSupabase } from '@/api/api.auth';
 import { Home } from '@/pages/Home';
-import FixMyProfile from '@/pages/Mypage/FixMyProfile';
-import MyPage from '@/pages/Mypage/MyPage';
-import { Children } from 'react';
-import Detail from '@/pages/detail/Detail';
+import { LogIn } from '@/pages/LogIn';
+import { SelectPlace } from '@/pages/SelectPlace';
+import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import MyPage from '@/pages/MyPage/MyPage';
+import FixMyProfile from '@/pages/MyPage/FixMyProfile';
 
 export const router = createBrowserRouter([
+  { path: '', element: <Home /> },
+  { path: '/select-place', element: <SelectPlace /> },
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <PrivateRoute>
+        <Layout />
+      </PrivateRoute>
+    ),
     children: [
-      { path: '', element: <Home /> },
+      {
+        path: 'my-page',
+        element: <MyPage />
+      },
       {
         path: 'detail/:id',
         element: <Detail />
       },
-      { path: '/MyPage', element: <MyPage /> },
-      { path: '/fix-my-profile', element: <FixMyProfile /> }
-    ]
+      {
+        path: 'fix-my-profile',
+        element: <FixMyProfile />
+      }
+    ],
+    loader: getSessionWithSupabase
+  },
+  {
+    path: '/',
+    element: (
+      <PublicRoute>
+        <Layout />
+      </PublicRoute>
+    ),
+    children: [
+      {
+        path: 'sign-up',
+        element: <SignUp />
+      },
+      {
+        path: 'log-in',
+        element: <LogIn />
+      }
+    ],
+    loader: getSessionWithSupabase
   }
 ]);

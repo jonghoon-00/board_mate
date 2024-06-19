@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Comments from '../coments/Comments';
 import {
   Hr,
@@ -13,6 +14,7 @@ import { StContainer } from '@/pages/detail/detail.styled';
 
 const ReadPost = ({ setIsEdit, targetData }) => {
   const { title, address, image_url, is_recruit, content } = targetData;
+  const [commentIsEdit, setCommentIsEdit] = useState(false);
 
   return (
     <>
@@ -35,7 +37,8 @@ const ReadPost = ({ setIsEdit, targetData }) => {
         <Hr />
       </StContainer>
 
-      <Comments />
+      <hr />
+      <Comments setCommentIsEdit={setCommentIsEdit} commentIsEdit={commentIsEdit} />
     </>
   );
 };
