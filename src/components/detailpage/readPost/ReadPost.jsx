@@ -10,11 +10,29 @@ import {
   StTitleSection
 } from './readPost.styled';
 
+import { deletePost } from '@/api/api.posts';
 import { StContainer } from '@/pages/detail/detail.styled';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const ReadPost = ({ setIsEdit, targetData }) => {
-  const { title, address, image_url, is_recruit, content } = targetData;
+const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
+  const navigate = useNavigate();
+  const { id: postId } = useParams();
+  const queryClient = useQueryClient();
+  const { title, address, image_url, is_recruit, content, user_id } = targetData;
   const [commentIsEdit, setCommentIsEdit] = useState(false);
+
+  const deletePostMutation = useMutation({
+    mutationFn: deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+    }
+  });
+  const deletePostHandler = (postId) => {
+    deletePostMutation.mutate(postId);
+    navigate('/');
+    alert('삭제되었습니다');
+  };
 
   return (
     <>
@@ -25,9 +43,9 @@ const ReadPost = ({ setIsEdit, targetData }) => {
         </StTitleSection>
         <StSubSection>
           <p>{address}</p>
-          <StButtonDiv>
+          <StButtonDiv $postEditAuthority={user_id === userInfo?.id}>
             <button onClick={() => setIsEdit(true)}>수정</button>
-            <button>삭제</button>
+            <button onClick={() => deletePostHandler(postId)}>삭제</button>
           </StButtonDiv>
         </StSubSection>
         <StContentSection>
@@ -38,7 +56,7 @@ const ReadPost = ({ setIsEdit, targetData }) => {
       </StContainer>
 
       <hr />
-      <Comments setCommentIsEdit={setCommentIsEdit} commentIsEdit={commentIsEdit} />
+      <Comments setCommentIsEdit={setCommentIsEdit} commentIsEdit={commentIsEdit} userInfo={userInfo} />
     </>
   );
 };
