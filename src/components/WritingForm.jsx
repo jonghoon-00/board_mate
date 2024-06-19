@@ -1,11 +1,28 @@
+import { getUser } from '@/api/api.auth';
 import { addImage, addPost } from '@/api/api.posts';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function WritingForm() {
+  const {
+    data: user,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser
+  });
+
+  const {
+    state: { info: mapInfo }
+  } = useLocation();
+  // console.log(state.info);
+  console.log(mapInfo);
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -31,12 +48,12 @@ function WritingForm() {
   const addPostHandler = () => {
     addMutation.mutate({
       id: uuidv4(),
-      address: 'create test address',
+      address: mapInfo.address_name,
       title,
       content,
       image_url: imageUrl,
       is_recruit: false,
-      user_id: uuidv4()
+      user_id: user.id
     });
   };
   return (
@@ -58,7 +75,8 @@ function WritingForm() {
         placeholder="내용을 작성해 주세요 ..."
       />
 
-      <StMapApi></StMapApi>
+      <StMapApi>지도api</StMapApi>
+
       <StLine />
       <StButtonContainer>
         <StBackButton>
@@ -138,11 +156,6 @@ const StInput = styled.input`
 
 const StMapApi = styled.div`
   height: 244px;
-  margin-bottom: 20px;
-  img {
-    width: 100%;
-    height: 244px;
-  }
 `;
 
 const StLine = styled.div`
