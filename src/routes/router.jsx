@@ -6,6 +6,7 @@ import { Home } from '@/pages/Home';
 import { LogIn } from '@/pages/LogIn';
 import { SelectPlace } from '@/pages/SelectPlace';
 import { SignUp } from '@/pages/SignUp/SignUp';
+import { Detail } from '@/pages/detail';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';

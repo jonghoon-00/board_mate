@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { StDiv } from './Home.styled';
-import styled from 'styled-components';
 import { getPosts } from '@/api/api.posts';
+import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { StDiv } from './Home.styled';
 
 export const Home = () => {
   const {

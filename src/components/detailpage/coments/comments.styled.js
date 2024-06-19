@@ -42,8 +42,8 @@ export const StCommentList = styled.div`
 
 export const StCommentWriterInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: end;
+  flex-direction: row;
+  align-items: end;
   & p {
     font-size: 1rem;
     font-weight: bold;
@@ -56,7 +56,6 @@ export const StCommentP = styled.p`
 
 export const StCommentUDBtns = styled.div`
   margin-left: auto;
-  /* box-sizing: border-box; */
   & button {
     width: 80px;
     height: 25px;
@@ -78,4 +77,34 @@ export const StCommentCard = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+`;
+export const StCommentProfileSection = styled.div`
+  display: flex;
+`;
+export const StCommentProfileImage = styled.img`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  padding: 0 1rem;
+`;
+
+export const StButtonDiv = styled.div`
+  display: ${(props) => (props.$commentEditAuthority ? 'flex' : 'none')};
+  justify-content: end;
+  align-items: start;
+  gap: 0.5rem;
+  width: 100%;
+  & button {
+    width: 5.3rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: #2d2d2d;
+    color: #fcfdff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+`;
+
+export const StCommentContentDiv = styled.div`
+  padding: 1rem;
 `;
