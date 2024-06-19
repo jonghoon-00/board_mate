@@ -53,7 +53,11 @@ function WritingForm() {
       content,
       image_url: imageUrl,
       is_recruit: false,
-      user_id: user.id
+      user_id: user.id,
+      coordinate: {
+        lat: mapInfo.y,
+        lng: mapInfo.x
+      }
     });
   };
   return (
