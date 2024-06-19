@@ -122,8 +122,8 @@ function FixMyProfile() {
         <br />
         <Input type="text" value={profileIntro} onChange={handleIntroChange} />
         <Buttons>
-          <Button buttonText={'저장'} type={'button'} color="2D2D2D" onClick={handleSubmit} />
-          <Button buttonText={'돌아가기'} type={'button'} color="2D2D2D" onClick={handleBackClick} />
+          <Button buttonText={'저장'} type={'button'} color="#2D2D2D" onClick={handleSubmit} />
+          <Button buttonText={'돌아가기'} type={'button'} color="#2D2D2D" onClick={handleBackClick} />
         </Buttons>
       </RightDiv>
     </Section>
