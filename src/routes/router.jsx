@@ -23,16 +23,16 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'my-page'
-        // element: <MyPage />
+        path: 'my-page',
+        element: <MyPage />
       },
       {
         path: 'detail/:id',
         element: <Detail />
       },
       {
-        path: 'fix-my-profile'
-        // element: <FixMyProfile />
+        path: 'fix-my-profile',
+        element: <FixMyProfile />
       },
       { path: 'writingpage', element: <FeedWrite /> }
     ],
