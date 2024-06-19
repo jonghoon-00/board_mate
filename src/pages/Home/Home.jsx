@@ -25,20 +25,20 @@ export const Home = () => {
               {posts && posts.length ? (
                 posts.map((post) => {
                   return (
-                    <StCard key={post.id}>
-                      {/* <Link to={`/detail/${post.id}`}> */}
-                      {post.image_url && <StCardImg src={post.image_url} />}
-                      <StTitle>{post.title}</StTitle>
-                      <StPlace>{post.address}</StPlace>
-                      {post.image_url ? (
-                        <StContent>{post.content}</StContent>
-                      ) : (
-                        <StContentNoImg>{post.content}</StContentNoImg>
-                      )}
+                    <Link style={{ textDecoration: 'none' }} key={post.id} to={`/detail/${post.id}`}>
+                      <StCard>
+                        {post.image_url && <StCardImg src={post.image_url} />}
+                        <StTitle>{post.title}</StTitle>
+                        <StPlace>{post.address}</StPlace>
+                        {post.image_url ? (
+                          <StContent>{post.content}</StContent>
+                        ) : (
+                          <StContentNoImg>{post.content}</StContentNoImg>
+                        )}
 
-                      <StPostItem>모집중</StPostItem>
-                      {/* </Link> */}
-                    </StCard>
+                        <StPostItem>모집중</StPostItem>
+                      </StCard>
+                    </Link>
                   );
                 })
               ) : (
@@ -111,6 +111,7 @@ const StCard = styled.li`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 1rem;
   box-sizing: border-box;
+  color: #000;
 `;
 
 const StCardImg = styled.img`

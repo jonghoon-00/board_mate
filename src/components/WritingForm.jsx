@@ -16,7 +16,6 @@ function WritingForm() {
     e.preventDefault();
     const fileObj = e.target.files[0];
     const data = await addImage(fileObj);
-    console.log(data.path);
     setImageUrl(`https://hiovftevpmlwqfamjnpe.supabase.co/storage/v1/object/public/post_images/${data.path}`);
   };
 
