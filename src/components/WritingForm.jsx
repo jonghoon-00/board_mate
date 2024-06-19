@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import map from '../pages/FeedWrite/map.png';
 
 function WritingForm() {
   return (
@@ -9,8 +10,9 @@ function WritingForm() {
       <StInput type="file" id="image" />
       <StTextArea placeholder="내용을 작성해 주세요 ..." />
 
-      <StMapApi>지도api</StMapApi>
-
+      <StMapApi>
+        <img src={map} />{' '}
+      </StMapApi>
       <StLine />
       <StButtonContainer>
         <StBackButton>
@@ -90,6 +92,11 @@ const StInput = styled.input`
 
 const StMapApi = styled.div`
   height: 244px;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+    height: 244px;
+  }
 `;
 
 const StLine = styled.div`
