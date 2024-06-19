@@ -12,8 +12,7 @@ import {
   StListItem,
   StPlaceInfo,
   StSearchBar,
-  StUl,
-  StInfoPreview
+  StUl
 } from './SelectPlace.styled';
 import { useNavigate } from 'react-router-dom';
 

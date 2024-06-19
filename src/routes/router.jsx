@@ -8,6 +8,8 @@ import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import MyPage from '@/pages/MyPage/MyPage';
+import FixMyProfile from '@/pages/MyPage/FixMyProfile';
 import { FeedWrite } from '@/pages/FeedWrite/FeedWrite';
 import { Detail } from '@/pages/detail';
 
@@ -23,19 +25,18 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'my-page'
-        // element: <MyPage />
+        path: 'my-page',
+        element: <MyPage />
       },
       {
         path: 'detail/:id',
         element: <Detail />
       },
       {
-        path: 'fix-my-profile'
-        // element: <FixMyProfile />
+        path: 'fix-my-profile',
+        element: <FixMyProfile />
       },
-      { path: 'writingpage', element: <FeedWrite /> },
-      { path: 'select-place', element: <SelectPlace /> }
+      { path: 'writingpage', element: <FeedWrite /> }
     ],
     loader: getSessionWithSupabase
   },
