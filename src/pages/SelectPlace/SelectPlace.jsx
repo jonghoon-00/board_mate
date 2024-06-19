@@ -5,6 +5,7 @@ import {
   StButtons,
   StDiv,
   StDummyImage,
+  StInfoPreview,
   StInfoWindow,
   StLeftSide,
   StLi,
