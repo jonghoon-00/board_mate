@@ -2,6 +2,21 @@ import styled from 'styled-components';
 import { StDiv } from './Home.styled';
 
 export const Home = () => {
+  // const dispatch = useDispatch();
+
+  // const {
+  //   data: user,
+  //   isPending: userIsPending,
+  //   isError: userIsError
+  // } = useQuery({
+  //   queryKey: ['user'],
+  //   queryFn: getSessionWithSupabase
+  // });
+
+  // useEffect(() => {
+  //   dispatch(setUser(user?.session));
+  // }, [user]);
+
   return (
     <StDiv>
       <StHomeSection>
