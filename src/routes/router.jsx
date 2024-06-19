@@ -15,7 +15,6 @@ import { PublicRoute } from './PublicRoute';
 
 export const router = createBrowserRouter([
   { path: '', element: <Home /> },
-  { path: '/select-place', element: <SelectPlace /> },
   {
     path: '/',
     element: (
@@ -36,6 +35,8 @@ export const router = createBrowserRouter([
         path: 'fix-my-profile',
         element: <FixMyProfile />
       },
+
+      { path: 'select-place', element: <SelectPlace /> },
       { path: 'writingpage', element: <FeedWrite /> }
     ],
     loader: getSessionWithSupabase

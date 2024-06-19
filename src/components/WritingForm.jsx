@@ -1,11 +1,28 @@
+import { getUser } from '@/api/api.auth';
 import { addImage, addPost } from '@/api/api.posts';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function WritingForm() {
+  const {
+    data: user,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser
+  });
+
+  const {
+    state: { info: mapInfo }
+  } = useLocation();
+  // console.log(state.info);
+  console.log(mapInfo);
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -31,12 +48,12 @@ function WritingForm() {
   const addPostHandler = () => {
     addMutation.mutate({
       id: uuidv4(),
-      address: 'create test address',
+      address: mapInfo.address_name,
       title,
       content,
       image_url: imageUrl,
       is_recruit: false,
-      user_id: uuidv4()
+      user_id: user.id
     });
   };
   return (
@@ -58,8 +75,27 @@ function WritingForm() {
         placeholder="내용을 작성해 주세요 ..."
       />
 
-      <StMapApi>지도api</StMapApi>
-
+      <Map // 로드뷰를 표시할 Container
+        center={{
+          lat: mapInfo.y,
+          lng: mapInfo.x
+        }}
+        style={{
+          width: '100%',
+          height: '700px'
+        }}
+        level={3}
+        draggable={false}
+        zoomable={false}
+      >
+        <MapMarker // 마커를 생성합니다
+          position={{
+            // 마커가 표시될 위치입니다
+            lat: mapInfo.y,
+            lng: mapInfo.x
+          }}
+        />
+      </Map>
       <StLine />
       <StButtonContainer>
         <StBackButton>
@@ -135,10 +171,6 @@ const StLabel = styled.label`
 const StInput = styled.input`
   display: none;
   width: 100%;
-`;
-
-const StMapApi = styled.div`
-  height: 244px;
 `;
 
 const StLine = styled.div`
