@@ -40,8 +40,7 @@ export const updateProfileWithSupabase = async (profileData, id) => {
 
 // users 테이블
 export const getUser = async () => {
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-  console.log(user);
+  const { data } = await supabase.auth.getUser();
+  const { data: user } = await supabase.from('users').select('*').eq('id', data.user.id).single();
+  return user;
 };

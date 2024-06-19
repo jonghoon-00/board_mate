@@ -3,7 +3,7 @@ import CrudTest from '@/pages/CrudTest/CrudTest';
 import { getSessionWithSupabase } from '@/api/api.auth';
 import { Home } from '@/pages/Home';
 import { LogIn } from '@/pages/LogIn';
-import { SelectPlace } from '@/pages/SelectPlace';
+import { SelectPlace } from '@/pages/SelectPlace/SelectPlace';
 import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
@@ -13,7 +13,7 @@ import { Detail } from '@/pages/detail';
 
 export const router = createBrowserRouter([
   { path: '', element: <Home /> },
-  { path: '/select-place', element: <SelectPlace /> },
+
   {
     path: '/',
     element: (
@@ -34,7 +34,8 @@ export const router = createBrowserRouter([
         path: 'fix-my-profile'
         // element: <FixMyProfile />
       },
-      { path: 'writingpage', element: <FeedWrite /> }
+      { path: 'writingpage', element: <FeedWrite /> },
+      { path: 'select-place', element: <SelectPlace /> }
     ],
     loader: getSessionWithSupabase
   },

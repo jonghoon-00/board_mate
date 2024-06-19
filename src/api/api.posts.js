@@ -7,6 +7,7 @@ export async function getPosts() {
 }
 
 export async function addPost(newPost) {
+  console.log(newPost);
   await supabase.from('posts').insert(newPost).select();
 }
 
