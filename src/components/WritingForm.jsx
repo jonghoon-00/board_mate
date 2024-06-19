@@ -3,9 +3,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-import map from '../pages/FeedWrite/map.png';
-
 import { v4 as uuidv4 } from 'uuid';
 
 function WritingForm() {
@@ -61,9 +58,7 @@ function WritingForm() {
         placeholder="내용을 작성해 주세요 ..."
       />
 
-      <StMapApi>
-        <img src={map} />{' '}
-      </StMapApi>
+      <StMapApi></StMapApi>
       <StLine />
       <StButtonContainer>
         <StBackButton>
