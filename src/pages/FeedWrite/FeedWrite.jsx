@@ -1,11 +1,9 @@
 import WritingForm from '@/components/WritingForm';
 
-function FeedWrite() {
+export const FeedWrite = () => {
   return (
     <>
       <WritingForm />
     </>
   );
-}
-
-export default FeedWrite;
+};

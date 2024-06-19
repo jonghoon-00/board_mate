@@ -19,9 +19,9 @@ const ReadPost = ({ setIsEdit, targetData }) => {
   return (
     <>
       <StContainer>
+        <StRecruitButton>{is_recruit ? '모집완료' : '모집중'}</StRecruitButton>
         <StTitleSection>
           <StTitleH1>{title}</StTitleH1>
-          <StRecruitButton>{is_recruit ? '모집완료' : '모집중'}</StRecruitButton>
         </StTitleSection>
         <StSubSection>
           <p>{address}</p>
