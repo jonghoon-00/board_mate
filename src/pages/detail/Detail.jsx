@@ -3,7 +3,6 @@ import ReadPost from '@/components/detailpage/readPost/ReadPost';
 import supabase from '@/supabase/supabaseClient';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { StContainer } from './detail.styled';
 
 export const Detail = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -23,8 +22,6 @@ export const Detail = () => {
     fetchThisData();
   }, []);
   return (
-    <StContainer>
-      {isEdit ? <EditPost setIsEdit={setIsEdit} /> : <ReadPost setIsEdit={setIsEdit} targetData={targetData} />}
-    </StContainer>
+    <>{isEdit ? <EditPost setIsEdit={setIsEdit} /> : <ReadPost setIsEdit={setIsEdit} targetData={targetData} />}</>
   );
 };
