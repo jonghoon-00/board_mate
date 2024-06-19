@@ -21,7 +21,6 @@ export const router = createBrowserRouter([
         <Layout />
       </PrivateRoute>
     ),
-
     children: [
       {
         path: 'my-page'
