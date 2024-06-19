@@ -4,6 +4,8 @@ import CrudTest from '@/pages/CrudTest/CrudTest';
 import { FeedWrite } from '@/pages/FeedWrite/FeedWrite';
 import { Home } from '@/pages/Home';
 import { LogIn } from '@/pages/LogIn';
+import { FixMyProfile } from '@/pages/MyPage/FixMyProfile';
+import { MyPage } from '@/pages/MyPage/MyPage';
 import { SelectPlace } from '@/pages/SelectPlace';
 import { SignUp } from '@/pages/SignUp/SignUp';
 import { Detail } from '@/pages/detail';
