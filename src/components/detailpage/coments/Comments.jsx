@@ -82,7 +82,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
         <p>{comments?.length}개의 댓글</p>
         <StTextArea
           type="text"
-          placeholder="댓글을 입력해주세요"
+          placeholder="댓글을 입력해주세요."
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
