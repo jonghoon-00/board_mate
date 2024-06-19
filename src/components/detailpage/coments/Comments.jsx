@@ -41,7 +41,6 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
   const addComment = (e) => {
     e.preventDefault();
     addMutation.mutate({ post_id: postId, content });
-    console.log('first');
   };
 
   //댓글삭제
@@ -72,23 +71,23 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
   };
 
   const nowEditHandler = (commentId) => {
-    console.log(commentId);
     setEditingCommentId(commentId);
     setCommentIsEdit(true);
   };
 
   return (
-    <StCommentFormSection onSubmit={addComment}>
-      {/* TODO comments 테이블에서 해당 postId의 항목 몇개인지 받아오기 */}
-      <p>{comments?.length}개의 댓글</p>
-      <StTextArea
-        type="text"
-        placeholder="댓글을 입력해주세요"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <StCommentSaveButton type="submit">저장</StCommentSaveButton>
-
+    <>
+      <StCommentFormSection onSubmit={addComment}>
+        {/* TODO comments 테이블에서 해당 postId의 항목 몇개인지 받아오기 */}
+        <p>{comments?.length}개의 댓글</p>
+        <StTextArea
+          type="text"
+          placeholder="댓글을 입력해주세요"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <StCommentSaveButton type="submit">저장</StCommentSaveButton>
+      </StCommentFormSection>
       <StCommentList>
         <ul>
           {comments?.map((comment) => {
@@ -136,7 +135,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit }) => {
           })}
         </ul>
       </StCommentList>
-    </StCommentFormSection>
+    </>
   );
 };
 

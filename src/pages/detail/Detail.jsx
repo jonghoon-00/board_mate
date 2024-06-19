@@ -1,6 +1,8 @@
+import { getSessionWithSupabase } from '@/api/api.auth';
 import EditPost from '@/components/detailpage/editPost/EditPost';
 import ReadPost from '@/components/detailpage/readPost/ReadPost';
 import supabase from '@/supabase/supabaseClient';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -8,6 +10,14 @@ export const Detail = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [targetData, setTargetData] = useState({});
   const postId = useParams().id;
+  const {
+    data: user,
+    isPending,
+    isError
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: getSessionWithSupabase
+  });
 
   useEffect(() => {
     const fetchThisData = async () => {
