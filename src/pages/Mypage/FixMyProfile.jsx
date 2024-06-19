@@ -14,7 +14,7 @@ function FixMyProfile() {
     nickName: '홍길동',
     email: 'qwer1234@gmail.com',
     profile: '',
-    intro: '좋아하는 게임: 브루마블'
+    intro: '브루마블'
   });
 
   console.log(user);
@@ -83,7 +83,7 @@ function FixMyProfile() {
   };
 
   const handleBackClick = () => {
-    navigate('/my-page');
+    navigate('/MyPage');
   };
 
   useEffect(() => {
@@ -96,86 +96,116 @@ function FixMyProfile() {
   }, [user]);
 
   return (
-    <Section>
-      <LeftDiv>
-        <ImageBox>
-          <img
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            src={profileImage ? profileImage : user.profile}
-            alt="profile image"
+    <StFixSection>
+      <StyFixProfile>
+        <StProfilePics>
+          <StProfilePicBox>
+            <img
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              src={profileImage ? profileImage : user.profile}
+              alt="profile image"
+            />
+          </StProfilePicBox>
+          <Button
+            buttonText={'이미지 변경하기'}
+            color={'#2D2D2D'}
+            type={'button'}
+            onClick={() => document.getElementById('fileInput').click()}
           />
-        </ImageBox>
-        <Button
-          buttonText={'이미지 변경하기'}
-          color={'#2D2D2DDD'}
-          type={'button'}
-          onClick={() => document.getElementById('fileInput').click()}
-        />
-        <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
-      </LeftDiv>
-      <RightDiv>
-        <Label>닉네임 변경하기</Label>
-        <br />
-        <Input type="text" value={profileName} onChange={handleNameChange} />
-        <br />
-        <Label>한 줄 소개 변경하기</Label>
-        <br />
-        <Input type="text" value={profileIntro} onChange={handleIntroChange} />
-        <Buttons>
+          <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+        </StProfilePics>
+        <StyledProfileBox>
+          <StLabelNick>
+            닉네임 <input type="text" value={profileName} onChange={handleNameChange} />
+          </StLabelNick>
+          <StLabelGame>
+            좋아하는 게임 <input type="text" value={profileIntro} onChange={handleIntroChange} />
+          </StLabelGame>
+        </StyledProfileBox>
+        <StButtons>
           <Button buttonText={'저장'} type={'button'} color="#2D2D2D" onClick={handleSubmit} />
           <Button buttonText={'돌아가기'} type={'button'} color="#2D2D2D" onClick={handleBackClick} />
-        </Buttons>
-      </RightDiv>
-    </Section>
+        </StButtons>
+      </StyFixProfile>
+    </StFixSection>
   );
 }
 
-const Section = styled.section`
-  max-width: 900px;
+const StFixSection = styled.section`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: auto auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px 50px 20px 50px;
 `;
 
-const LeftDiv = styled.div`
-  margin-bottom: 15px;
+const StyFixProfile = styled.section`
+  width: 920px;
+  height: 240px;
+  padding: 16px;
+  margin-top: 60px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #fcfdff;
+  display: flex;
+`;
+
+const StProfilePics = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: auto 0 auto 80px;
 `;
 
-const RightDiv = styled.div`
-  margin-left: 60px;
-`;
-
-const ImageBox = styled.div`
+const StProfilePicBox = styled.div`
   width: 170px;
   height: 170px;
-  border-radius: 70%;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   background-color: #f0f0f0;
   overflow: hidden;
-  margin: 50px 0px 20px 0px;
 `;
 
-const Label = styled.label`
-  font-size: 19px;
+const StyledProfileBox = styled.div`
+  width: 400px;
+  gap: 45px;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0 auto 30px;
 `;
 
-const Input = styled.input`
-  margin: 20px 0px 25px 0px;
-  font-size: 15px;
-  height: 25px;
-  font-size: 25px;
-  padding: 5px;
+const StLabelNick = styled.label`
+  width: 100%;
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  & input {
+    border: none;
+    margin-left: 10px;
+    font-size: 24px;
+  }
 `;
 
-const Buttons = styled.div`
+const StLabelGame = styled.label`
+  width: 100%;
+  font-size: 20px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  & input {
+    border: none;
+    margin-left: 10px;
+    min-width: 50px;
+    max-width: 210px;
+    font-size: 20px;
+  }
+`;
+
+const StButtons = styled.div`
+  margin: 0 0 auto auto;
   display: flex;
   gap: 10px;
 `;
