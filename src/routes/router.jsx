@@ -7,6 +7,8 @@ import { SignUp } from '@/pages/SignUp/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import MyPage from '@/pages/MyPage/MyPage';
+import FixMyProfile from '@/pages/MyPage/FixMyProfile';
 
 export const router = createBrowserRouter([
   { path: '', element: <Home /> },
@@ -18,20 +20,20 @@ export const router = createBrowserRouter([
         <Layout />
       </PrivateRoute>
     ),
-    // children: [
-    //   {
-    //     path: 'my-page',
-    //     element: <MyPage />
-    //   },
-    //   {
-    //     path: 'detail/:id',
-    //     element: <Detail />
-    //   },
-    //   {
-    //     path: 'fix-my-profile',
-    //     element: <FixMyProfile />
-    //   }
-    // ],
+    children: [
+      {
+        path: 'my-page',
+        element: <MyPage />
+      },
+      {
+        path: 'detail/:id',
+        element: <Detail />
+      },
+      {
+        path: 'fix-my-profile',
+        element: <FixMyProfile />
+      }
+    ],
     loader: getSessionWithSupabase
   },
   {
