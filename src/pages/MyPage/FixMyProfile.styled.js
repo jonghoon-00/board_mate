@@ -6,7 +6,7 @@ export const StFixSection = styled.section`
   align-items: center;
 `;
 
-export const StyFixProfile = styled.section`
+export const StFixProfile = styled.section`
   width: 920px;
   height: 240px;
   padding: 16px;
@@ -37,7 +37,7 @@ export const StProfilePicBox = styled.div`
   overflow: hidden;
 `;
 
-export const StyledProfileBox = styled.div`
+export const StProfileBox = styled.div`
   width: 400px;
   gap: 45px;
   display: flex;

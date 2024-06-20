@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledSection = styled.section`
+export const StSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const StyledProfile = styled.div`
+export const StProfile = styled.div`
   width: 920px;
   height: 240px;
   padding: 16px;
@@ -18,7 +18,7 @@ export const StyledProfile = styled.div`
   display: flex;
 `;
 
-export const StyledProfilePic = styled.img`
+export const StProfilePic = styled.img`
   height: 170px;
   width: 170px;
   margin: auto 0 auto 80px;
@@ -26,13 +26,13 @@ export const StyledProfilePic = styled.img`
   background-color: #f0f0f0;
 `;
 
-export const StyledProfileBox = styled.div`
+export const StProfileBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto 0 auto 30px;
 `;
 
-export const StyledProfileName = styled.p`
+export const StProfileName = styled.p`
   font-size: 24px;
   font-weight: 900;
   margin-bottom: 45px;
@@ -41,14 +41,14 @@ export const StyledProfileName = styled.p`
   white-space: normal;
 `;
 
-export const StyledProfileIntro = styled.span`
+export const StProfileIntro = styled.span`
   font-size: 20px;
   font-weight: 900;
   display: flex;
   align-items: center;
 `;
 
-export const StyledProfileGame = styled.span`
+export const StProfileGame = styled.span`
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-left: 5px;
@@ -64,6 +64,7 @@ export const StyledProfileGame = styled.span`
 
 export const StButton = styled.div`
   margin: 0 0 auto auto;
+  cursor: pointer;
 `;
 
 export const StCardsCotainer = styled.div`
