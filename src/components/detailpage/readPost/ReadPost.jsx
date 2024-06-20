@@ -50,7 +50,7 @@ const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
           </StButtonDiv>
         </StSubSection>
         <StContentSection>
-          <img src={image_url} alt="image" />
+          {image_url && <img src={image_url} alt="image" />}
           <p>{content}</p>
           {coordinate && (
             <Map // 로드뷰를 표시할 Container
