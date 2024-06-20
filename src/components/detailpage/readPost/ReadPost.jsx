@@ -21,15 +21,11 @@ import {
   StTitleSection
 } from './readPost.styled';
 
-const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
+const ReadPost = ({ setIsEdit, userInfo }) => {
   const navigate = useNavigate();
   const { id: postId } = useParams();
   const queryClient = useQueryClient();
   const [commentIsEdit, setCommentIsEdit] = useState(false);
-
-  localStorage.setItem('address', targetData.address);
-  localStorage.setItem('x', targetData.coordinate?.lng);
-  localStorage.setItem('y', targetData.coordinate?.lat);
 
   //포스트 정보 가져오기
   const {

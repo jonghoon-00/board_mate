@@ -3,8 +3,6 @@ import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 
 import { useNavigate } from 'react-router-dom';
 import {
-  StInfoContent,
-  StInfoTitle,
   StInfoWindow,
   StLeftSide,
   StLi,
@@ -14,12 +12,15 @@ import {
   StUl
 } from '../../../pages/SelectPlace/SelectPlace.styled';
 // import { StContainer } from '../readPost/readPost.styled';
+import { StHr } from '../readPost/readPost.styled';
 import {
   StContainer,
+  StInfoContentP,
   StMapContainer,
   StPlaceDetail,
+  StPlaceInfoContent,
+  StPlaceInfoTitle,
   StPlaceListDiv,
-  StSelectPlaceButton,
   StSelectPlaceInfoPreview,
   StWrap
 } from './editPlace.styled';
@@ -182,17 +183,16 @@ export const EditPlace = ({ setIsEditPlace }) => {
 
       {info && (
         <StSelectPlaceInfoPreview>
-          <StInfoTitle>선택한 주소 정보</StInfoTitle>
-          <hr />
-          <StInfoContent>{info.content}</StInfoContent>
-          <StInfoContent>{info.address_name}</StInfoContent>
-          {/* <div>ID : {info.id}</div> */}
-          <StSelectPlaceButton onClick={mapAddHandler}>해당 위치 선택</StSelectPlaceButton>
+          <StPlaceInfoTitle>선택한 주소 정보</StPlaceInfoTitle>
+          <StHr />
+          <StPlaceInfoContent>
+            <StInfoContentP>{info.content}</StInfoContentP>
+            <StInfoContentP>{info.address_name}</StInfoContentP>
+          </StPlaceInfoContent>
+
+          <button onClick={mapAddHandler}>해당 위치 선택</button>
         </StSelectPlaceInfoPreview>
       )}
-      {/* <StEditButtonDiv>
-        <StEditButton>위치변경</StEditButton>
-      </StEditButtonDiv> */}
     </StContainer>
   );
 };
