@@ -124,4 +124,21 @@ export const StPostItem = styled.div`
   border-radius: 0.5rem;
 `;
 
+export const StMoreButton = styled.button`
+  width: 200px;
+  height: 80px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2d2d2d;
+  color: #fcfdff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+`;
+export const StButtonBox = styled.div`
+  margin: 50px auto;
+  width: 100%;
+  text-align: center;
+`;
+
 export const StDiv = styled.div``;
