@@ -4,7 +4,7 @@ import { AuthInput } from '@/components/AuthInput';
 import { useInputs } from '@/hooks/useInputs';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { StButton, StDiv, StForm, StTitle } from './LogIn.styled';
+import { StButton, StDiv, StForm, StTitle, StSignUpButton } from './LogIn.styled';
 
 export const LogIn = () => {
   const navigate = useNavigate();
@@ -51,6 +51,7 @@ export const LogIn = () => {
             onChange={setInputs}
           />
           <StButton type="submit">로그인</StButton>
+          <StSignUpButton>회원가입 페이지로</StSignUpButton>
         </StForm>
       </StDiv>
     </Page>

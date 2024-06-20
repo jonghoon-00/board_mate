@@ -43,3 +43,18 @@ export const StButton = styled.button`
     opacity: 0.8;
   }
 `;
+export const StSignUpButton = styled.button`
+  width: 300px;
+  height: 40px;
+  background-color: #a1a1a1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
