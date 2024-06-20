@@ -14,12 +14,13 @@ import { deletePost } from '@/api/api.posts';
 import { StContainer } from '@/pages/detail/detail.styled';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
   const navigate = useNavigate();
   const { id: postId } = useParams();
   const queryClient = useQueryClient();
-  const { title, address, image_url, is_recruit, content, user_id } = targetData;
+  const { title, address, image_url, is_recruit, content, user_id, coordinate } = targetData;
   const [commentIsEdit, setCommentIsEdit] = useState(false);
 
   const deletePostMutation = useMutation({
@@ -29,9 +30,11 @@ const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
     }
   });
   const deletePostHandler = (postId) => {
-    deletePostMutation.mutate(postId);
-    navigate('/');
-    alert('삭제되었습니다');
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deletePostMutation.mutate(postId);
+      navigate('/');
+      alert('삭제가 완료되었습니다.');
+    }
   };
 
   return (
@@ -49,8 +52,31 @@ const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
           </StButtonDiv>
         </StSubSection>
         <StContentSection>
-          <img src={image_url} alt="image" />
+          {image_url && <img src={image_url} alt="image" />}
           <p>{content}</p>
+          {coordinate && (
+            <Map // 로드뷰를 표시할 Container
+              center={{
+                lat: coordinate.lat,
+                lng: coordinate.lng
+              }}
+              style={{
+                width: '100%',
+                height: '500px'
+              }}
+              level={2}
+              draggable={false}
+              zoomable={false}
+            >
+              <MapMarker // 마커를 생성합니다
+                position={{
+                  // 마커가 표시될 위치입니다
+                  lat: coordinate.lat,
+                  lng: coordinate.lng
+                }}
+              />
+            </Map>
+          )}
         </StContentSection>
         <Hr />
       </StContainer>

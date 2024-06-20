@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 
 import {
+  StContainer,
+  StMapTitle,
   StButtons,
   StDiv,
   StDummyImage,
@@ -12,7 +14,11 @@ import {
   StListItem,
   StPlaceInfo,
   StSearchBar,
-  StUl
+  StUl,
+  StInfoTitle,
+  StInfoContent,
+  StMapAddButton,
+  StBackButton
 } from './SelectPlace.styled';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +26,7 @@ const PlaceListItem = ({ marker, setInfo, isSelectd }) => {
   // console.log(marker);
   return (
     <StListItem $isSelected={isSelectd}>
-      <StDummyImage></StDummyImage>
+      {/* <StDummyImage></StDummyImage> */}
       <StPlaceInfo>
         <h3>{marker.place_name}</h3>
         <p>{marker.category_group_name}</p>
@@ -118,11 +124,12 @@ export const SelectPlace = () => {
   if (isLoading) return <div>loading...</div>;
 
   return (
-    <>
+    <StContainer>
+      <StMapTitle>함께 보드게임할 장소를 검색하고, 선택하세요!</StMapTitle>
       <StDiv>
         <StLeftSide>
           <StSearchBar>
-            <input value={inputText} onChange={inputChange} type="text" />
+            <input placeholder="원하는 장소를 검색하세요!" value={inputText} onChange={inputChange} type="text" />
             <button onClick={handleClickButton}>검색</button>
           </StSearchBar>
           <StUl>
@@ -140,7 +147,8 @@ export const SelectPlace = () => {
           }}
           style={{
             width: '100%',
-            height: '700px'
+            height: '600px',
+            borderRadius: '10px'
           }}
           level={3}
           onCreate={setMap}
@@ -164,13 +172,24 @@ export const SelectPlace = () => {
       </StDiv>
       {info && (
         <StInfoPreview>
-          <span>"Info" state 정보</span>
+          <StInfoTitle>선택한 주소 정보</StInfoTitle>
           <hr />
-          <div>장소 : {info.content}</div>
-          <div>ID : {info.id}</div>
-          <button onClick={mapAddHandler}>등록하기</button>
+          <StInfoContent>장소 : {info.content}</StInfoContent>
+          <StInfoContent>주소 : {info.address_name}</StInfoContent>
+          {/* <div>ID : {info.id}</div> */}
+          <StMapAddButton onClick={mapAddHandler}>장소 등록하기!</StMapAddButton>
         </StInfoPreview>
       )}
-    </>
+      <StBackButton
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        나가기
+      </StBackButton>
+    </StContainer>
   );
 };
