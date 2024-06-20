@@ -1,9 +1,16 @@
 import supabase from '@/supabase/supabaseClient';
 
-export async function getPosts() {
-  const { data: posts, error } = await supabase.from('posts').select('*').order('created_at', { ascending: false });
-  if (error) throw error;
-  return posts;
+export async function getPosts(pageParam, ITEMS_PER_PAGE) {
+  console.log((pageParam - 1) * ITEMS_PER_PAGE, pageParam * ITEMS_PER_PAGE - 1);
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range((pageParam - 1) * ITEMS_PER_PAGE, pageParam * ITEMS_PER_PAGE - 1);
+
+  const { data: allPosts } = await supabase.from('posts').select('*');
+  const postsLength = allPosts.length;
+  return { posts, postsLength };
 }
 
 export async function addPost(newPost) {
