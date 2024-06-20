@@ -188,25 +188,45 @@ const StPostItem = styled.div`
 `;
 
 export {
-  StPostItem,
-  StContentNoImg,
-  StContent,
-  StPlace,
-  StTitle,
-  StCardImg,
+  StButton,
   StCard,
+  StCardImg,
   StCards,
   StCardsAlignBtn,
   StCardsCotainer,
   StCardsSection,
-  StSlideSection,
+  StContent,
+  StContentNoImg,
   StHomeSection,
-  StButton,
+  StPlace,
+  StPostItem,
+  StProfile,
+  StProfileBox,
   StProfileGame,
   StProfileIntro,
   StProfileName,
-  StProfileBox,
   StProfilePic,
-  StProfile,
-  StSection
+  StSection,
+  StSlideSection,
+  StTitle
 };
+
+export const StCardFooter = styled.div`
+  display: flex;
+  align-items: flex-end;
+  flex: 1 1 0;
+`;
+
+export const StUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const StUserProfileImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`;
+
+export const StUsername = styled.p``;

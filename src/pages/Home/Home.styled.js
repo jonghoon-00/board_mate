@@ -142,3 +142,23 @@ export const StButtonBox = styled.div`
 `;
 
 export const StDiv = styled.div``;
+
+export const StCardFooter = styled.div`
+  display: flex;
+  align-items: flex-end;
+  flex: 1 1 0;
+`;
+
+export const StUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const StUserProfileImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`;
+
+export const StUsername = styled.p``;
