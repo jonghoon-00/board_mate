@@ -6,6 +6,7 @@ import { getSessionWithSupabase } from '@/api/api.auth';
 
 import { signOutWithSupabase } from '@/api/api.auth';
 import { useSelector } from 'react-redux';
+import supabase from '@/supabase/supabaseClient';
 
 function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,7 +60,7 @@ function Layout() {
 
         <StSignDiv>
           <>
-            <Link to="/writingpage">
+            <Link to="/select-place">
               <StNoneBodyBtn color="#F2B564">글 작성</StNoneBodyBtn>
             </Link>
           </>

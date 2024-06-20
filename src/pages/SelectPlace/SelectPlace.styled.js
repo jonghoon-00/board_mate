@@ -1,21 +1,33 @@
 import styled from 'styled-components';
 
+export const StContainer = styled.div`
+  margin: 0 auto;
+`;
+export const StMapTitle = styled.h2`
+  font-size: 30px;
+  font-weight: bold;
+  margin: 50px 0;
+`;
 export const StDiv = styled.div`
-  margin-top: 100px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 700px;
+  width: 1000px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
 export const StLeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
   flex-shrink: 0;
-  flex-basis: 500px;
-  width: 500px;
+  flex-basis: 320px;
+  /* width: 400px; */
   height: 100%;
 `;
 
@@ -23,7 +35,7 @@ export const StSearchBar = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 300px;
   height: 60px;
   padding: 10px;
   background-color: #fcfdff;
@@ -68,7 +80,6 @@ export const StUl = styled.ul`
 
 export const StLi = styled.li`
   display: flex;
-  justify-content: center;
 `;
 
 export const StDummyImage = styled.div`
@@ -124,7 +135,7 @@ export const StButtons = styled.div`
 
 export const StListItem = styled.div`
   box-sizing: border-box;
-  width: 400px;
+  width: 300px;
   height: 160px;
   padding: 20px;
   background-color: ${(props) => (props.$isSelected ? '#c6c6c6' : '#FCFDFF')};
@@ -159,10 +170,22 @@ export const StInfoWindow = styled.div`
 `;
 
 export const StInfoPreview = styled.div`
-  border: 1px solid #c0c0c0;
+  width: 1000px;
+  margin: 20px auto 0;
+  box-sizing: border-box;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
   background-color: #fcfdff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 20px;
+`;
+
+export const StMapAddButton = styled.button`
+  border: none;
+  background-color: #2d2d2d;
+  color: white;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
 `;

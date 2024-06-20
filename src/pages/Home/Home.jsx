@@ -24,10 +24,11 @@ export const Home = () => {
         <StCardsSection>
           <StCardsCotainer>
             <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
-            <StCards>
-              {posts && posts.length ? (
-                posts.map((post) => {
-                  return (
+
+            {posts && posts.length ? (
+              posts.map((post) => {
+                return (
+                  <StCards>
                     <Link style={{ textDecoration: 'none' }} key={post.id} to={`/detail/${post.id}`}>
                       <StCard>
                         {post.image_url && <StCardImg src={post.image_url} />}
@@ -42,12 +43,12 @@ export const Home = () => {
                         <StPostItem>모집중</StPostItem>
                       </StCard>
                     </Link>
-                  );
-                })
-              ) : (
-                <div>안녕</div>
-              )}
-            </StCards>
+                  </StCards>
+                );
+              })
+            ) : (
+              <StNoCard>작성된 게시물이 없습니다.</StNoCard>
+            )}
           </StCardsCotainer>
         </StCardsSection>
       </StHomeSection>
@@ -90,6 +91,10 @@ const StCardsAlignBtn = styled.button`
   background-color: #fcfdff;
   color: #2d2d2d;
   font-weight: 700;
+`;
+
+const StNoCard = styled.div`
+  text-align: center;
 `;
 
 const StCards = styled.ul`
