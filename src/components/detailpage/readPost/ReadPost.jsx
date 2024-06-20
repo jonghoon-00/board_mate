@@ -80,7 +80,7 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
           <StTitleH1>{title}</StTitleH1>
 
           <StPostInfo>
-            <p>{targetData.users.nickname}</p>
+            {/* <p>{targetData.users.nickname}</p> */}
             <StDateP>{date}</StDateP>
           </StPostInfo>
 

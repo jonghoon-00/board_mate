@@ -1,6 +1,7 @@
 import { getPost, updatePost } from '@/api/api.posts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { EditPlace } from '../editPlace/EditPlace';
 import { StHr, StPostImage } from '../readPost/readPost.styled';
 import {
@@ -29,6 +30,7 @@ const EditPost = ({ setIsEdit }) => {
   const [newContent, setNewContent] = useState(content);
 
   const queryClient = useQueryClient();
+  const { id: postId } = useParams();
 
   //게시글 수정
   const updatePostMutation = useMutation({
@@ -41,6 +43,8 @@ const EditPost = ({ setIsEdit }) => {
     return <div>Loading...</div>;
   }
 
+  const today = new Date();
+
   const updatePostHandler = (targetData) => {
     if (!title.trim() || !content.trim()) {
       alert('제목과 내용을 전부 입력하세요.');
@@ -48,11 +52,14 @@ const EditPost = ({ setIsEdit }) => {
     }
     console.log(newTitle);
     updatePostMutation.mutate({
-      ...targetData,
+      created_at,
       is_recruit: recruit,
       address: localStorage.getItem('address'),
       title: newTitle,
       content: newContent,
+      id,
+      user_id,
+      image_url,
       coordinate: {
         lat: localStorage.getItem('y'),
         lng: localStorage.getItem('x')
@@ -64,8 +71,6 @@ const EditPost = ({ setIsEdit }) => {
     localStorage.removeItem('address');
     localStorage.removeItem('x');
     localStorage.removeItem('y');
-
-    console.log(newTitle);
   };
 
   if (isPending) {
@@ -77,7 +82,6 @@ const EditPost = ({ setIsEdit }) => {
   }
 
   return (
-    // TODO 이미지 변경 어떻게 할지 고민해야함
     <StContainer>
       <StRecruitDiv $isRecruit={recruit}>
         <p>모집 현황 (클릭)</p>
