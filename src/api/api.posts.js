@@ -22,13 +22,12 @@ export async function getHomePosts(pageParam, ITEMS_PER_PAGE) {
 }
 
 export async function getPost(postId) {
-  const { data: post, error } = await supabase.from('posts').select('*').eq('id', postId).single();
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(post);
-    return post;
-  }
+  const { data: post, error } = await supabase
+    .from('posts')
+    .select(`*, users(image_url, nickname)`)
+    .eq('id', postId)
+    .single();
+  return post;
 }
 
 export async function addPost(newPost) {

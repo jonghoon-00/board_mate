@@ -120,7 +120,6 @@ export const EditPlace = ({ setIsEditPlace }) => {
   }, [map, keyword]);
 
   const mapAddHandler = () => {
-    // navigate('/writingpage', { state: { info } });
     console.log(info);
     localStorage.setItem('address', info.road_address_name);
     localStorage.setItem('x', info.x);
@@ -153,7 +152,6 @@ export const EditPlace = ({ setIsEditPlace }) => {
                 position={marker.position}
                 onClick={() => {
                   setInfo(marker);
-                  // console.log(marker);
                 }}
               ></MapMarker>
             ))}
