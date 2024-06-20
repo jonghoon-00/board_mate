@@ -4,7 +4,7 @@ import { AuthInput } from '@/components/AuthInput';
 import { useInputs } from '@/hooks/useInputs';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { StButton, StDiv, StForm, StTitle, StSignUpButton } from './LogIn.styled';
+import { StButton, StDiv, StForm, StSignUpButton, StTitle } from './LogIn.styled';
 
 export const LogIn = () => {
   const navigate = useNavigate();

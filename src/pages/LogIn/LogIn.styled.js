@@ -43,6 +43,7 @@ export const StButton = styled.button`
     opacity: 0.8;
   }
 `;
+
 export const StSignUpButton = styled.button`
   width: 300px;
   height: 40px;
