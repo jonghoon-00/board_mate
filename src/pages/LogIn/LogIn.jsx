@@ -51,7 +51,13 @@ export const LogIn = () => {
             onChange={setInputs}
           />
           <StButton type="submit">로그인</StButton>
-          <StSignUpButton>회원가입 페이지로</StSignUpButton>
+          <StSignUpButton
+            onClick={() => {
+              navigate('/sign-up');
+            }}
+          >
+            회원가입 페이지로
+          </StSignUpButton>
         </StForm>
       </StDiv>
     </Page>
