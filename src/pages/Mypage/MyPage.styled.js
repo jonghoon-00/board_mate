@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const StSection = styled.section`
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
   align-items: center;
 `;
 
@@ -89,6 +91,7 @@ const StCardsSection = styled.section`
 `;
 
 const StCardsCotainer = styled.div`
+  display: flex;
   min-width: 1000px;
   margin-bottom: 10px;
   /* background-color: gray; */
