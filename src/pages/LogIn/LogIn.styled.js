@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StDiv = styled.div`
+const StDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,13 +13,13 @@ export const StDiv = styled.div`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const StTitle = styled.h1`
+const StTitle = styled.h1`
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 40px;
 `;
 
-export const StForm = styled.form`
+const StForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@ export const StForm = styled.form`
   gap: 20px;
 `;
 
-export const StButton = styled.button`
+const StButton = styled.button`
   width: 300px;
   height: 40px;
   background-color: #2d2d2d;
@@ -59,3 +59,5 @@ export const StSignUpButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+export { StButton, StDiv, StForm, StTitle };
