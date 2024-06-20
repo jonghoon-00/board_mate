@@ -71,7 +71,8 @@ export const StCardImg = styled.img`
 `;
 
 export const StTitle = styled.p`
-  font-size: 2rem;
+  font-size: 18px;
+  font-weight: 900;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
@@ -81,12 +82,13 @@ export const StTitle = styled.p`
 `;
 
 export const StPlace = styled.p`
-  font-size: 1.5rem;
+  font-size: 14px;
+  font-weight: 900;
 `;
 
 export const StContent = styled.p`
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
@@ -97,7 +99,7 @@ export const StContent = styled.p`
 
 export const StContentNoImg = styled.p`
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
