@@ -41,6 +41,10 @@ const EditPost = ({ setIsEdit }) => {
   }
 
   const updatePostHandler = (targetData) => {
+    if (!title.trim() || !content.trim()) {
+      alert('제목과 내용을 전부 입력하세요.');
+      return;
+    }
     updatePostMutation.mutate({
       ...targetData,
       is_recruit: recruit,

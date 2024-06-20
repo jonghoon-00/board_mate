@@ -49,6 +49,9 @@ export const StSubSection = styled.div`
 `;
 
 export const StButtonDiv = styled.div`
+  margin-top: 2rem;
+  width: 100%;
+  justify-content: end;
   display: ${(props) => (props.$postEditAuthority ? 'flex' : 'none')};
   gap: 20px;
   & button {
