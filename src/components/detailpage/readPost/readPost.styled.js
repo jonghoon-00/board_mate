@@ -2,11 +2,11 @@ import styled from 'styled-components';
 export const StDiv = styled.div``;
 
 export const StContainer = styled.div`
-  width: 650px;
-  height: auto;
-  margin: 60px auto;
-  padding: 1.2rem 1rem;
+  width: 60%;
+  /* height: 50vh; */
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 2rem auto;
+  padding: 2rem;
   box-sizing: border-box;
 `;
 
@@ -22,10 +22,10 @@ export const StTitleH1 = styled.h1`
 export const StRecruitButton = styled.button`
   width: 90px;
   height: 32px;
-  color: #f2b564;
+  color: ${(props) => (props.$is_recruit ? '#12B886' : '#f2b564')};
   background-color: #fcfdff;
   border-radius: 1rem;
-  border: 2px solid #f2b564;
+  border: 2px solid;
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 20px;

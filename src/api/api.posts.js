@@ -27,7 +27,10 @@ export async function deletePost(postId) {
 }
 
 export async function updatePost(updatePost) {
-  await supabase.from('posts').update(updatePost).eq('id', updatePost.id);
+  const { error } = await supabase.from('posts').update(updatePost).eq('id', updatePost.id);
+  if (error) {
+    console.log(error);
+  }
 }
 
 export async function addImage(fileObj) {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StCommentFormSection = styled.form`
   height: auto;
   box-sizing: border-box;
-  width: 650px;
+  width: 100%;
   margin: 0 auto;
   padding: 1.2rem 1rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -33,10 +33,11 @@ export const StCommentSaveButton = styled.button`
 `;
 
 export const StCommentList = styled.div`
+  width: 100%;
   height: auto;
   & li {
     border-bottom: 1px solid black;
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
   }
 `;
 
@@ -67,7 +68,7 @@ export const StCommentUDBtns = styled.div`
 `;
 
 export const StCommentCard = styled.section`
-  width: 650px;
+  width: 100%;
   height: 180px;
   margin: 40px auto;
   padding: 1.2rem 1rem;
