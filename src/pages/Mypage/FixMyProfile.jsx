@@ -3,6 +3,7 @@ import supabase from '@/supabase/supabaseClient';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import Button from './Button';
 import {
   StButtons,
@@ -23,10 +24,10 @@ function FixMyProfile() {
     isError
   } = useQuery({
     queryKey: ['user'],
-    queryFn: getUser
+    queryFn: getUser,
+    gcTime: 0
   });
 
-  console.log(user);
   const navigate = useNavigate();
 
   const [profileImage, setProfileImage] = useState('');
@@ -35,19 +36,9 @@ function FixMyProfile() {
   const [profileFavorite, setProfileFavorite] = useState('');
   const [previewUrl, setPreviewUrl] = useState('');
 
-  // const onFileChange = (e) => {
-  //   const file = imgRef.current.files[0];
-  //   setImageFile(file);
-
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setImageUrl(reader.result);
-  //   };
-  // };
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
     setProfileImage(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -67,10 +58,9 @@ function FixMyProfile() {
   // 닉네임, 프로필사진 변경
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const avatar = 'profile_image';
-    const FILE_NAME = 'profileImage';
-    const fileUrl = `${FILE_NAME}_${user.id}`;
+    const imageId = uuidv4();
+    const FILE_NAME = 'profile_image';
+    const fileUrl = `${FILE_NAME}_${imageId}`;
 
     const updatingObj = {};
 
@@ -87,8 +77,13 @@ function FixMyProfile() {
     }
 
     if (profileImage !== user.image_url) {
+      // const existFileName = user.image_url.split('avatars/')[1];
+      // console.log(existFileName);
+      // const { data, error } = await supabase.storage.from('avatars').remove([existFileName]);
+      // console.log(data, error);
+
       const response = await supabase.storage.from('avatars').upload(fileUrl, profileImage, { upsert: true });
-      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl);
+      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl); //superbase에서 받아온 이미지url
 
       updatingObj.image_url = publicUrl.data.publicUrl;
     }
@@ -96,6 +91,10 @@ function FixMyProfile() {
     const response = await updateProfileWithSupabase(updatingObj, user.id);
 
     queryClient.invalidateQueries(['user']);
+
+    alert('프로필 변경이 성공적으로 완료되었습니다!');
+
+    navigate('/my-page');
   };
 
   const handleBackClick = () => {
@@ -120,7 +119,7 @@ function FixMyProfile() {
           <StProfilePicBox>
             <img
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              src={profileImage ? previewUrl : user.image_url}
+              src={previewUrl ? previewUrl : profileImage}
               alt=""
             />
           </StProfilePicBox>
