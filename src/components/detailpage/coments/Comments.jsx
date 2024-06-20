@@ -1,5 +1,6 @@
 import { addCommentData, deleteCommentData, getCommentData, updateCommentData } from '@/api/api.comment';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StContainer } from '../readPost/readPost.styled';
@@ -12,6 +13,7 @@ import {
   StCommentProfileImage,
   StCommentProfileSection,
   StCommentSaveButton,
+  StCommentWriterInfoDiv,
   StTextArea
 } from './comments.styled';
 
@@ -111,10 +113,10 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
                       alt=""
                     />
                     <img src="../../" alt="" />
-                    <div>
+                    <StCommentWriterInfoDiv>
                       <p>{comment.writer}</p>
-                      <p>{comment.created_at}</p>
-                    </div>
+                      <p>{dayjs(comment.created_at).locale('ko').format('YYYY-MM-DD HH:mm')}</p>
+                    </StCommentWriterInfoDiv>
                     <StButtonDiv $commentEditAuthority={comment.user_id === userInfo?.id}>
                       {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
                       {commentIsEdit && editingCommentId === comment.id ? (

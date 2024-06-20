@@ -53,7 +53,10 @@ export const StPlaceDetail = styled.div`
     border: 1px solid #fcfdff;
     background-color: #2d2d2d;
     color: #fcfdff;
-    padding: 1px 2px;
+  }
+  & button {
+    margin-top: 20px;
+    height: 2.4rem;
   }
 `;
 
