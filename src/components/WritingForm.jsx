@@ -44,6 +44,10 @@ function WritingForm() {
   });
 
   const addPostHandler = () => {
+    if (!title.trim() || !content.trim()) {
+      alert('제목과 내용을 전부 입력하세요.');
+      return;
+    }
     addMutation.mutate({
       id: uuidv4(),
       address: mapInfo.address_name,
