@@ -6,11 +6,14 @@ import Button from './Button';
 import {
   StButton,
   StCard,
+  StCardFooter,
   StCardImg,
   StCards,
   StCardsCotainer,
   StContent,
   StContentNoImg,
+  StMyPost,
+  StNoCard,
   StPlace,
   StPostItem,
   StProfile,
@@ -20,7 +23,10 @@ import {
   StProfileName,
   StProfilePic,
   StSection,
-  StTitle
+  StTitle,
+  StUserInfo,
+  StUserProfileImage,
+  StUsername
 } from './MyPage.styled';
 
 const MyPage = () => {
@@ -36,10 +42,8 @@ const MyPage = () => {
     isError
   } = useQuery({
     queryKey: ['user'],
-    queryFn: getUser,
-    gcTime: 0
+    queryFn: getUser
   });
-  console.log(user);
 
   const { data: posts } = useQuery({
     queryKey: ['posts'],
@@ -47,8 +51,6 @@ const MyPage = () => {
   });
 
   if (isPending) return <div>Loading...</div>;
-
-  console.log(user.image_url);
 
   return (
     <StSection>
@@ -65,6 +67,8 @@ const MyPage = () => {
           <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#2D2D2D"></Button>
         </StButton>
       </StProfile>
+      <br />
+      <StMyPost>내가 작성한 게시물</StMyPost>
       <br />
       <StCardsCotainer>
         <StCards>
@@ -86,13 +90,24 @@ const MyPage = () => {
                         <StContentNoImg>{post.content}</StContentNoImg>
                       )}
 
-                      <StPostItem>모집중</StPostItem>
+                      <StCardFooter>
+                        <StUserInfo>
+                          <StUserProfileImage src={post.users.image_url} />
+                          <StUsername>{post.users.nickname}</StUsername>
+                        </StUserInfo>
+
+                        <StPostItem>{post.is_recruit ? '모집 완료' : '모집중'}</StPostItem>
+                      </StCardFooter>
                     </StCard>
                   </Link>
                 );
               })
           ) : (
-            <div>안녕</div>
+            <>
+              <div></div>
+              <StNoCard>작성된 게시물이 없습니다</StNoCard>
+              <div></div>
+            </>
           )}
         </StCards>
       </StCardsCotainer>
