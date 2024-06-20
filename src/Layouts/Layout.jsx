@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom/dist';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom/dist';
 import { signOutWithSupabase } from '@/api/api.auth';
+import imgsrc from '@/assets/main-logo.svg';
 import supabase from '@/supabase/supabaseClient';
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom/dist';
+import styled from 'styled-components';
 
 function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +24,7 @@ function Layout() {
       try {
         await signOutWithSupabase();
         setIsLoggedIn(false);
-        navigate('/');
+        window.location.replace('/');
       } catch (error) {
         console.error('Error logging out:', error.message);
       }
@@ -37,8 +37,6 @@ function Layout() {
         <Link to="/">
           <StLogo src={imgsrc} />
         </Link>
-
-        <StNoneBodyBtn>둘러보기</StNoneBodyBtn>
 
         <Link to="/my-page">
           <StNoneBodyBtn>마이페이지</StNoneBodyBtn>
@@ -94,9 +92,6 @@ const StLogo = styled.img`
 `;
 
 // 반응형 생각했을 땐 로고 너비 20vw 하고 높이를 너비에 따라 고정되게 하면 좋을텐데 방법 찾아본 후 수정
-
-const imgsrc =
-  'https://media.discordapp.net/attachments/868151962623967276/1252433645688459294/boradmate.png?ex=6672333a&is=6670e1ba&hm=3f9290842f3d0008c8835a875662770a36d302c9b412d920b479a4df638c6c30&=&format=webp&quality=lossless';
 
 // 나중에 링크 말고 파일 위치로 수정할 예정
 
