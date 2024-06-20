@@ -39,7 +39,7 @@ export const Detail = () => {
   return (
     <>
       {isEdit ? (
-        <EditPost setIsEdit={setIsEdit} />
+        <EditPost setIsEdit={setIsEdit} targetData={targetData} />
       ) : (
         <ReadPost setIsEdit={setIsEdit} targetData={targetData} userInfo={userInfo} />
       )}
