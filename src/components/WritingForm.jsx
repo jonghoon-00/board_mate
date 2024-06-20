@@ -85,9 +85,9 @@ function WritingForm() {
         }}
         style={{
           width: '100%',
-          height: '700px'
+          height: '500px'
         }}
-        level={3}
+        level={2}
         draggable={false}
         zoomable={false}
       >

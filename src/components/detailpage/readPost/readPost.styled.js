@@ -52,6 +52,7 @@ export const StButtonDiv = styled.div`
     color: #fcfdff;
     font-size: 12px;
     font-weight: 700;
+    cursor: pointer;
   }
 `;
 

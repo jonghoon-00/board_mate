@@ -30,9 +30,11 @@ const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
     }
   });
   const deletePostHandler = (postId) => {
-    deletePostMutation.mutate(postId);
-    navigate('/');
-    alert('삭제되었습니다');
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deletePostMutation.mutate(postId);
+      navigate('/');
+      alert('삭제가 완료되었습니다.');
+    }
   };
 
   return (
@@ -60,9 +62,9 @@ const ReadPost = ({ setIsEdit, targetData, userInfo }) => {
               }}
               style={{
                 width: '100%',
-                height: '700px'
+                height: '500px'
               }}
-              level={3}
+              level={2}
               draggable={false}
               zoomable={false}
             >

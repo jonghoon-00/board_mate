@@ -1,50 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom/dist';
+import { Outlet, useNavigate } from 'react-router-dom/dist';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom/dist';
-import { getSessionWithSupabase } from '@/api/api.auth';
-
 import { signOutWithSupabase } from '@/api/api.auth';
-import { useSelector } from 'react-redux';
 import supabase from '@/supabase/supabaseClient';
 
 function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const checkLoginStatus = async () => {
-    const user = supabase.auth.user();
-    console.log(user);
-    setIsLoggedIn(true);
+    const response = await supabase.auth.getUser();
+    const user = response.data.user;
+    setIsLoggedIn(!!user);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkLoginStatus();
   }, []);
 
-  const handleLogin = async () => {
-    setIsLoggedIn(true);
-  };
-
   const handleLogout = async () => {
-    try {
-      await signOutWithSupabase();
-      setIsLoggedIn(false);
-    } catch (error) {
-      console.error('Error logging out:', error.message);
+    if (confirm('정말 로그아웃하시겠습니까?')) {
+      try {
+        await signOutWithSupabase();
+        setIsLoggedIn(false);
+        navigate('/');
+      } catch (error) {
+        console.error('Error logging out:', error.message);
+      }
     }
   };
 
-  const [view, setView] = useState('');
-  console.log(view);
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getSessionWithSupabase();
-      setView(data);
-    };
-    getData();
-  }, []);
-
-  console.log(isLoggedIn);
   return (
     <StBackground>
       <StHeader>
@@ -67,11 +53,11 @@ function Layout() {
 
           <>
             {isLoggedIn ? (
-              <Link to="/">
-                <StSignBtn onClick={handleLogout}>로그아웃</StSignBtn>
-              </Link>
+              <StSignBtn onClick={handleLogout}>로그아웃</StSignBtn>
             ) : (
-              <StSignBtn onClick={handleLogin}>로그인</StSignBtn>
+              <Link to="/log-in">
+                <StSignBtn>로그인</StSignBtn>
+              </Link>
             )}
           </>
         </StSignDiv>
@@ -140,6 +126,7 @@ const StSignBtn = styled.button`
   color: #2d2d2d;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 export default Layout;
