@@ -126,6 +126,7 @@ const StSignBtn = styled.button`
   color: #2d2d2d;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 export default Layout;
