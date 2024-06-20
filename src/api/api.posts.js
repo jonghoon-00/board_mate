@@ -1,14 +1,18 @@
 import supabase from '@/supabase/supabaseClient';
 
 export async function getPosts() {
-  const { data: posts, error } = await supabase.from('posts').select('*').order('created_at', { ascending: false });
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select(`*, users(image_url, nickname)`)
+    .order('created_at', { ascending: false });
+  console.log(posts);
   return posts;
 }
 
 export async function getHomePosts(pageParam, ITEMS_PER_PAGE) {
   const { data: posts, error } = await supabase
     .from('posts')
-    .select('*')
+    .select(`*, users(image_url, nickname)`)
     .order('created_at', { ascending: false })
     .range((pageParam - 1) * ITEMS_PER_PAGE, pageParam * ITEMS_PER_PAGE - 1);
 
