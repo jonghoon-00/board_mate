@@ -58,11 +58,25 @@ export const StPlaceDetail = styled.div`
 `;
 
 export const StSelectPlaceInfoPreview = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
   padding: 2rem;
   text-align: center;
 `;
 
-export const StSelectPlaceButton = styled.button`
-  width: 400px;
+export const StPlaceInfoTitle = styled.h1`
+  font-weight: bold;
+  font-size: 1.8rem;
+  padding: 1rem 0;
+`;
+
+export const StPlaceInfoContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+`;
+
+export const StInfoContentP = styled.p`
+  font-weight: bold;
+  font-size: 1.2rem;
 `;

@@ -11,7 +11,10 @@ export const StContainer = styled.div`
 `;
 
 export const StTitleSection = styled.div`
-  height: 60px;
+  padding: 1rem 0;
+  & p {
+    padding: 1rem 0;
+  }
 `;
 export const StTitleH1 = styled.h1`
   font-size: 3rem;
@@ -21,24 +24,22 @@ export const StTitleH1 = styled.h1`
 `;
 export const StRecruitButton = styled.button`
   width: 90px;
-  height: 32px;
   color: ${(props) => (props.$is_recruit ? '#12B886' : '#f2b564')};
   background-color: #fcfdff;
   border-radius: 1rem;
   border: 2px solid;
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 20px;
 `;
 
 export const StSubSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 35px;
-  margin-top: 40px;
   font-size: 1rem;
   font-weight: 700;
+  padding: 1rem 0;
+  margin: 1rem 0;
 `;
 
 export const StButtonDiv = styled.div`
@@ -57,15 +58,20 @@ export const StButtonDiv = styled.div`
 `;
 
 export const StContentSection = styled.div`
-  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 2rem;
   min-height: 40vh;
   & p {
     padding: 20px 0 20px 0;
     word-wrap: break-word;
   }
-  img {
-    width: 100%;
-  }
+`;
+
+export const StImaDiv = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const StPostImage = styled.img`
