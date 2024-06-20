@@ -5,7 +5,6 @@ export async function getPosts() {
     .from('posts')
     .select(`*, users(image_url, nickname)`)
     .order('created_at', { ascending: false });
-  console.log(posts);
   return posts;
 }
 
@@ -43,6 +42,8 @@ export async function updatePost(updatePost) {
   const { error } = await supabase.from('posts').update(updatePost).eq('id', updatePost.id);
   if (error) {
     console.log(error);
+  } else {
+    console.log('first');
   }
 }
 
