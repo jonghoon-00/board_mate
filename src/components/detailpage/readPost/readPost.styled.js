@@ -68,6 +68,10 @@ export const StContentSection = styled.div`
   }
 `;
 
-export const Hr = styled.hr`
+export const StPostImage = styled.img`
+  max-width: 24rem;
+`;
+
+export const StHr = styled.hr`
   border: 1px solid #b4b4b4;
 `;
