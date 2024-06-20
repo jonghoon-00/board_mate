@@ -3,10 +3,8 @@ import { StPostImage } from '../readPost/readPost.styled';
 import { StButtonDiv, StContainer, StContentSection, StInputDiv } from './editPost.styled';
 
 const EditPost = ({ setIsEdit, targetData }) => {
-  //TODO : 모집중 상태 변경 로직
-  //모집중 모집 완료 담을 useState 생성 o
-  //버튼 클릭으로 토글되게 함
-  //수정 완료시의 상태로 모집중 상태 업데이트
+  //TODO : 모집중 상태 변경 로직 - recruit 상태 받아와서 업데이트
+
   const { title, image_url, content, is_recruit } = targetData;
   const [recruit, setRecruit] = useState(is_recruit);
 
@@ -20,7 +18,9 @@ const EditPost = ({ setIsEdit, targetData }) => {
         <label>제목</label>
         <input placeholder={title} />
       </StInputDiv>
-      <button></button>
+      <button onClick={() => setRecruit(!recruit)}>{recruit ? '모집 완료' : '모집중'}</button>
+      <button>위치 수정</button>
+      <EditPost />
       <StContentSection>
         <StPostImage src={image_url} alt="image" />
         <textarea placeholder={targetData.content} />
