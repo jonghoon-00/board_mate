@@ -109,3 +109,10 @@ export const StButtonDiv = styled.div`
 export const StCommentContentDiv = styled.div`
   padding: 1rem;
 `;
+
+export const StCommentWriterInfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;

@@ -1,11 +1,11 @@
 import { getUser } from '@/api/api.auth';
 import { addImage, addPost } from '@/api/api.posts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function WritingForm() {
   const {
@@ -122,7 +122,7 @@ function WritingForm() {
 
 const StContainer = styled.div`
   width: 650px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 30px;
   font-family: Arial, sans-serif;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
