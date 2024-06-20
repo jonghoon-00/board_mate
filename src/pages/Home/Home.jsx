@@ -1,7 +1,6 @@
 import { getHomePosts } from '@/api/api.posts';
 import img from '@/assets/mainitem.png';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+
 import {
   StButtonBox,
   StCard,
