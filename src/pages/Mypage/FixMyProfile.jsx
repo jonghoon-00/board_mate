@@ -88,7 +88,7 @@ function FixMyProfile() {
 
     if (profileImage !== user.image_url) {
       const response = await supabase.storage.from('avatars').upload(fileUrl, profileImage, { upsert: true });
-      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl); //superbase에서 받아온 이미지url
+      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl);
 
       updatingObj.image_url = publicUrl.data.publicUrl;
     }
