@@ -47,6 +47,10 @@ export const StCards = styled.ul`
   row-gap: 60px;
 `;
 
+export const StNoCard = styled.div`
+  text-align: center;
+`;
+
 export const StCard = styled.li`
   background-color: #fcfdff;
   width: 320px;
