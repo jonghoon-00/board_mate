@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const StSection = styled.section`
+const StSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const StProfile = styled.div`
+const StProfile = styled.div`
   width: 920px;
   height: 240px;
   padding: 16px;
@@ -18,7 +18,7 @@ export const StProfile = styled.div`
   display: flex;
 `;
 
-export const StProfilePic = styled.img`
+const StProfilePic = styled.img`
   height: 170px;
   width: 170px;
   margin: auto 0 auto 80px;
@@ -26,13 +26,13 @@ export const StProfilePic = styled.img`
   background-color: #f0f0f0;
 `;
 
-export const StProfileBox = styled.div`
+const StProfileBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto 0 auto 30px;
 `;
 
-export const StProfileName = styled.p`
+const StProfileName = styled.p`
   font-size: 24px;
   font-weight: 900;
   margin-bottom: 45px;
@@ -41,14 +41,14 @@ export const StProfileName = styled.p`
   white-space: normal;
 `;
 
-export const StProfileIntro = styled.span`
+const StProfileIntro = styled.span`
   font-size: 20px;
   font-weight: 900;
   display: flex;
   align-items: center;
 `;
 
-export const StProfileGame = styled.span`
+const StProfileGame = styled.span`
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-left: 5px;
@@ -62,12 +62,12 @@ export const StProfileGame = styled.span`
   white-space: normal;
 `;
 
-export const StButton = styled.div`
+const StButton = styled.div`
   margin: 0 0 auto auto;
   cursor: pointer;
 `;
 
-export const StHomeSection = styled.section`
+const StHomeSection = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -75,26 +75,26 @@ export const StHomeSection = styled.section`
   overflow-y: auto;
 `;
 
-export const StSlideSection = styled.section`
+const StSlideSection = styled.section`
   height: 700px;
   background-color: #f4b061;
   display: flex;
   justify-content: center;
 `;
 
-export const StCardsSection = styled.section`
+const StCardsSection = styled.section`
   min-height: 300px;
   display: flex;
   justify-content: center;
 `;
 
-export const StCardsCotainer = styled.div`
+const StCardsCotainer = styled.div`
   min-width: 1000px;
   margin-bottom: 10px;
   /* background-color: gray; */
 `;
 
-export const StCardsAlignBtn = styled.button`
+const StCardsAlignBtn = styled.button`
   margin-top: 2rem;
   margin-bottom: 2rem;
   width: 10rem;
@@ -105,7 +105,7 @@ export const StCardsAlignBtn = styled.button`
   font-weight: 700;
 `;
 
-export const StCards = styled.ul`
+const StCards = styled.ul`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 320px));
@@ -114,7 +114,7 @@ export const StCards = styled.ul`
   row-gap: 60px;
 `;
 
-export const StCard = styled.li`
+const StCard = styled.li`
   background-color: #fcfdff;
   width: 320px;
   height: 323px;
@@ -129,7 +129,7 @@ export const StCard = styled.li`
   color: #000;
 `;
 
-export const StCardImg = styled.img`
+const StCardImg = styled.img`
   background-color: black;
   width: 100%;
   height: 160px;
@@ -137,7 +137,7 @@ export const StCardImg = styled.img`
   object-fit: cover;
 `;
 
-export const StTitle = styled.p`
+const StTitle = styled.p`
   font-size: 18px;
   font-weight: 900;
   text-overflow: ellipsis;
@@ -148,12 +148,12 @@ export const StTitle = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-export const StPlace = styled.p`
+const StPlace = styled.p`
   font-size: 14px;
   font-weight: 900;
 `;
 
-export const StContent = styled.p`
+const StContent = styled.p`
   line-height: 1.5;
   font-size: 14px;
   text-overflow: ellipsis;
@@ -164,7 +164,7 @@ export const StContent = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-export const StContentNoImg = styled.p`
+const StContentNoImg = styled.p`
   line-height: 1.5;
   font-size: 14px;
   text-overflow: ellipsis;
@@ -175,7 +175,7 @@ export const StContentNoImg = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-export const StPostItem = styled.div`
+const StPostItem = styled.div`
   background-color: #2d2d2d;
   color: #fcfdff;
   display: flex;
@@ -187,4 +187,26 @@ export const StPostItem = styled.div`
   border-radius: 0.5rem;
 `;
 
-export const StDiv = styled.div``;
+export {
+  StPostItem,
+  StContentNoImg,
+  StContent,
+  StPlace,
+  StTitle,
+  StCardImg,
+  StCard,
+  StCards,
+  StCardsAlignBtn,
+  StCardsCotainer,
+  StCardsSection,
+  StSlideSection,
+  StHomeSection,
+  StButton,
+  StProfileGame,
+  StProfileIntro,
+  StProfileName,
+  StProfileBox,
+  StProfilePic,
+  StProfile,
+  StSection
+};

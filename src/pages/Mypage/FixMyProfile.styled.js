@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const StFixSection = styled.section`
+const StFixSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const StFixProfile = styled.section`
+const StFixProfile = styled.section`
   width: 920px;
   height: 240px;
   padding: 16px;
@@ -18,7 +18,7 @@ export const StFixProfile = styled.section`
   display: flex;
 `;
 
-export const StProfilePics = styled.div`
+const StProfilePics = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@ export const StProfilePics = styled.div`
   margin: auto 0 auto 80px;
 `;
 
-export const StProfilePicBox = styled.div`
+const StProfilePicBox = styled.div`
   width: 170px;
   height: 170px;
   border-radius: 50%;
@@ -37,7 +37,7 @@ export const StProfilePicBox = styled.div`
   overflow: hidden;
 `;
 
-export const StProfileBox = styled.div`
+const StProfileBox = styled.div`
   width: 400px;
   gap: 45px;
   display: flex;
@@ -45,7 +45,7 @@ export const StProfileBox = styled.div`
   margin: auto 0 auto 30px;
 `;
 
-export const StLabelNick = styled.label`
+const StLabelNick = styled.label`
   width: 100%;
   font-size: 24px;
   font-weight: 900;
@@ -58,7 +58,7 @@ export const StLabelNick = styled.label`
   }
 `;
 
-export const StLabelGame = styled.label`
+const StLabelGame = styled.label`
   width: 100%;
   font-size: 20px;
   font-weight: 900;
@@ -73,8 +73,19 @@ export const StLabelGame = styled.label`
   }
 `;
 
-export const StButtons = styled.div`
+const StButtons = styled.div`
   margin: 0 0 auto auto;
   display: flex;
   gap: 10px;
 `;
+
+export {
+  StButtons,
+  StLabelGame,
+  StLabelNick,
+  StProfileBox,
+  StProfilePicBox,
+  StProfilePics,
+  StFixProfile,
+  StFixSection
+};
