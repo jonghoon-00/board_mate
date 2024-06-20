@@ -2,6 +2,7 @@ import { addCommentData, deleteCommentData, getCommentData, updateCommentData } 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { StContainer } from '../readPost/readPost.styled';
 import {
   StButtonDiv,
   StCommentCard,
@@ -64,7 +65,6 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
   };
 
   //댓글수정
-  // TODO 수정도 닉네임 등 추가해서 변경
   const updateMutation = useMutation({
     mutationFn: updateCommentData,
     onSuccess: () => {
@@ -89,70 +89,72 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
 
   return (
     <>
-      <StCommentFormSection onSubmit={addComment}>
-        <p>{comments?.length}개의 댓글</p>
-        <StTextArea
-          type="text"
-          placeholder="댓글을 입력해주세요."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <StCommentSaveButton type="submit">저장</StCommentSaveButton>
-      </StCommentFormSection>
-      <StCommentList>
-        <ul>
-          {comments?.map((comment) => {
-            return (
-              <StCommentCard key={comment.id}>
-                <StCommentProfileSection>
-                  <StCommentProfileImage
-                    src={comment.image_url === null ? '../../../assets/userProfile.png' : comment.image_url}
-                    alt=""
-                  />
-                  <img src="../../" alt="" />
-                  <div>
-                    <p>{comment.writer}</p>
-                    <p>{comment.created_at}</p>
-                  </div>
-                  <StButtonDiv $commentEditAuthority={comment.user_id === userInfo?.id}>
-                    {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
-                    {commentIsEdit && editingCommentId === comment.id ? (
-                      <button type="button" onClick={() => updateCommentHandler(comment)}>
-                        완료
-                      </button>
-                    ) : (
-                      <button type="button" onClick={() => nowEditHandler(comment.id)}>
-                        수정
-                      </button>
-                    )}
-                    {commentIsEdit ? (
-                      <button type="button" onClick={() => setCommentIsEdit(false)}>
-                        취소
-                      </button>
-                    ) : (
-                      <button type="button" onClick={() => deleteCommentHandler(comment.id)}>
-                        삭제
-                      </button>
-                    )}
-                  </StButtonDiv>
-                </StCommentProfileSection>
-
-                <StCommentContentDiv>
-                  {commentIsEdit && editingCommentId === comment.id ? (
-                    <input
-                      value={newContent}
-                      onChange={(e) => setNewContent(e.target.value)}
-                      placeholder={comment.content}
+      <StContainer>
+        <StCommentFormSection onSubmit={addComment}>
+          <p>{comments?.length}개의 댓글</p>
+          <StTextArea
+            type="text"
+            placeholder="댓글을 입력해주세요."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <StCommentSaveButton type="submit">저장</StCommentSaveButton>
+        </StCommentFormSection>
+        <StCommentList>
+          <ul>
+            {comments?.map((comment) => {
+              return (
+                <StCommentCard key={comment.id}>
+                  <StCommentProfileSection>
+                    <StCommentProfileImage
+                      src={comment.image_url === null ? '../../../assets/userProfile.png' : comment.image_url}
+                      alt=""
                     />
-                  ) : (
-                    <p>{comment.content}</p>
-                  )}
-                </StCommentContentDiv>
-              </StCommentCard>
-            );
-          })}
-        </ul>
-      </StCommentList>
+                    <img src="../../" alt="" />
+                    <div>
+                      <p>{comment.writer}</p>
+                      <p>{comment.created_at}</p>
+                    </div>
+                    <StButtonDiv $commentEditAuthority={comment.user_id === userInfo?.id}>
+                      {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
+                      {commentIsEdit && editingCommentId === comment.id ? (
+                        <button type="button" onClick={() => updateCommentHandler(comment)}>
+                          완료
+                        </button>
+                      ) : (
+                        <button type="button" onClick={() => nowEditHandler(comment.id)}>
+                          수정
+                        </button>
+                      )}
+                      {commentIsEdit ? (
+                        <button type="button" onClick={() => setCommentIsEdit(false)}>
+                          취소
+                        </button>
+                      ) : (
+                        <button type="button" onClick={() => deleteCommentHandler(comment.id)}>
+                          삭제
+                        </button>
+                      )}
+                    </StButtonDiv>
+                  </StCommentProfileSection>
+
+                  <StCommentContentDiv>
+                    {commentIsEdit && editingCommentId === comment.id ? (
+                      <input
+                        value={newContent}
+                        onChange={(e) => setNewContent(e.target.value)}
+                        placeholder={comment.content}
+                      />
+                    ) : (
+                      <p>{comment.content}</p>
+                    )}
+                  </StCommentContentDiv>
+                </StCommentCard>
+              );
+            })}
+          </ul>
+        </StCommentList>
+      </StContainer>
     </>
   );
 };
