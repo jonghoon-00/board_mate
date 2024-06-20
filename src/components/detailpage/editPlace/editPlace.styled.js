@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const StContainer = styled.div`
-  /* background-color: red; */
-  width: 95%;
+  width: 98%;
   box-sizing: border-box;
 `;
 
 export const StWrap = styled.div`
   display: flex;
+  width: 100%;
 `;
 export const StMapContainer = styled.div`
   box-sizing: border-box;
@@ -17,7 +17,7 @@ export const StMapContainer = styled.div`
 `;
 export const StPlaceListDiv = styled.div`
   width: 22%;
-  height: 60vh;
+  height: 38rem;
   position: absolute;
   z-index: 10;
 `;

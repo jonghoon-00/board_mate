@@ -3,7 +3,6 @@ export const StDiv = styled.div``;
 
 export const StContainer = styled.div`
   width: 60%;
-  /* height: 50vh; */
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin: 2rem auto;
   padding: 2rem;
@@ -11,16 +10,25 @@ export const StContainer = styled.div`
 `;
 
 export const StTitleSection = styled.div`
-  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0 1rem;
+  gap: 0.5rem;
   & p {
-    padding: 1rem 0;
+    font-weight: bold;
+    font-size: 1.1rem;
   }
+`;
+export const StDateP = styled.div`
+  font-size: 1.2rem;
+  color: grey;
 `;
 export const StTitleH1 = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   white-space: normal;
   word-wrap: break-word;
+  margin-bottom: 1rem;
 `;
 export const StRecruitButton = styled.button`
   width: 90px;
@@ -38,8 +46,6 @@ export const StSubSection = styled.div`
   align-items: center;
   font-size: 1rem;
   font-weight: 700;
-  padding: 1rem 0;
-  margin: 1rem 0;
 `;
 
 export const StButtonDiv = styled.div`
@@ -56,7 +62,11 @@ export const StButtonDiv = styled.div`
     cursor: pointer;
   }
 `;
-
+export const StPostInfo = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
 export const StContentSection = styled.div`
   display: flex;
   flex-direction: column;

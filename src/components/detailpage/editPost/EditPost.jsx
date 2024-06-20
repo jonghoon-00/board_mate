@@ -73,7 +73,6 @@ const EditPost = ({ setIsEdit }) => {
   return (
     // TODO 이미지 변경 어떻게 할지 고민해야함
     <StContainer>
-      {/* <StH1>게시글 수정</StH1> */}
       <StRecruitDiv $isRecruit={recruit}>
         <p>모집 현황 (클릭)</p>
         <button onClick={() => setRecruit(!recruit)}>{recruit ? '모집 완료' : '모집중'}</button>
