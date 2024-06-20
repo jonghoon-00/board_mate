@@ -104,9 +104,9 @@ const MyPage = () => {
               })
           ) : (
             <>
-              <StNoCard></StNoCard>
+              <div></div>
               <StNoCard>작성된 게시물이 없습니다</StNoCard>
-              <StNoCard></StNoCard>
+              <div></div>
             </>
           )}
         </StCards>
