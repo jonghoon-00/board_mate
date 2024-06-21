@@ -19,6 +19,7 @@ const EditPost = ({ setIsEdit }) => {
     queryKey: ['post'],
     queryFn: () => getPost(postId)
   });
+  console.log(targetData);
   const { content, image_url, is_recruit, title } = targetData;
 
   const [recruit, setRecruit] = useState(is_recruit);
@@ -45,6 +46,7 @@ const EditPost = ({ setIsEdit }) => {
       alert('제목과 내용을 전부 입력하세요.');
       return;
     }
+    console.log(newTitle);
     updatePostMutation.mutate({
       ...targetData,
       is_recruit: recruit,
