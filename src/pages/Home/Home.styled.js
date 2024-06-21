@@ -159,6 +159,7 @@ export const StUserProfileImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 16px;
+  object-fit: cover;
 `;
 
 export const StUsername = styled.p``;
