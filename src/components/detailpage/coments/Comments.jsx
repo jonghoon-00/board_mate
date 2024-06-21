@@ -43,8 +43,9 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
       setContent('');
     }
   });
-
+  console.log(userInfo);
   const addComment = (e) => {
+    if (!userInfo) return alert('로그인 후 이용 가능합니다');
     e.preventDefault();
     addMutation.mutate({
       post_id: postId,
