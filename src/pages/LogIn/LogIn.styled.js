@@ -60,8 +60,4 @@ export const StSignUpButton = styled.button`
   }
 `;
 
-<<<<<<< HEAD
-export { StButton, StDiv, StForm, StTitle };
-=======
 export { StDiv, StTitle, StForm, StButton };
->>>>>>> 9102444 (fix: error 해결)

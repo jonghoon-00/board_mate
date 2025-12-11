@@ -12,8 +12,8 @@ import {
   StCardsCotainer,
   StContent,
   StContentNoImg,
-  StMyPost,
-  StNoCard,
+//   StMyPost,
+//   StNoCard,
   StPlace,
   StPostItem,
   StProfile,
@@ -68,7 +68,7 @@ const MyPage = () => {
         </StButton>
       </StProfile>
       <br />
-      <StMyPost>내가 작성한 게시물</StMyPost>
+      {/* <StMyPost>내가 작성한 게시물</StMyPost> */}
       <br />
       <StCardsCotainer>
         <StCards>
@@ -105,7 +105,7 @@ const MyPage = () => {
           ) : (
             <>
               <div></div>
-              <StNoCard>작성된 게시물이 없습니다</StNoCard>
+              {/* <StNoCard>작성된 게시물이 없습니다</StNoCard> */}
               <div></div>
             </>
           )}
