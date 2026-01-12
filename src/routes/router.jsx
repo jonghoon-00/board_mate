@@ -4,8 +4,8 @@ import CrudTest from '@/pages/CrudTest/CrudTest';
 import { FeedWrite } from '@/pages/FeedWrite/FeedWrite';
 import { Home } from '@/pages/Home';
 import { LogIn } from '@/pages/LogIn';
-import {MyPage} from '@/pages/MyPage/MyPage'
 import { FixMyProfile } from '@/pages/MyPage/FixMyProfile';
+import { MyPage } from '@/pages/MyPage/MyPage';
 import { SelectPlace } from '@/pages/SelectPlace';
 import { SignUp } from '@/pages/SignUp/SignUp';
 import { Detail } from '@/pages/detail';
@@ -17,12 +17,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    children: [
-      {
-        path: '',
-        element: <Home />
-      }
-    ]
+    children: [{ path: '', element: <Home /> }]
   },
   {
     path: '/',
@@ -31,26 +26,15 @@ export const router = createBrowserRouter([
         <Layout />
       </PrivateRoute>
     ),
+    loader: getSessionWithSupabase, // ✅ { session } 반환
     children: [
-      {
-        path: 'my-page',
-        element: <MyPage />
-      },
-      {
-        path: 'detail/:id',
-        element: <Detail />
-      },
-      {
-        path: 'fix-my-profile',
-        element: <FixMyProfile />
-      },
-
+      { path: 'my-page', element: <MyPage /> },
+      { path: 'detail/:id', element: <Detail /> },
+      { path: 'fix-my-profile', element: <FixMyProfile /> },
       { path: 'select-place', element: <SelectPlace /> },
       { path: 'writingpage', element: <FeedWrite /> }
-    ],
-    loader: getSessionWithSupabase
+    ]
   },
-
   {
     path: '/',
     element: (
@@ -58,17 +42,11 @@ export const router = createBrowserRouter([
         <Layout />
       </PublicRoute>
     ),
+    loader: getSessionWithSupabase, // ✅ { session } 반환
     children: [
-      {
-        path: 'sign-up',
-        element: <SignUp />
-      },
-      {
-        path: 'log-in',
-        element: <LogIn />
-      }
-    ],
-    loader: getSessionWithSupabase
+      { path: 'sign-up', element: <SignUp /> },
+      { path: 'log-in', element: <LogIn /> }
+    ]
   },
   {
     path: '/crudtest',

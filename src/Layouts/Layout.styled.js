@@ -9,12 +9,16 @@ export const StBackground = styled.section`
 `;
 
 export const StHeader = styled.section`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   height: 100px;
   background-color: #2d2d2d;
   color: #fcfdff;
   display: flex;
   align-items: center;
-  padding: 5px 20px 5px 20px;
+  padding: 5px 20px;
   box-sizing: border-box;
 `;
 
@@ -24,18 +28,17 @@ export const StLogo = styled.img`
   margin-right: 10px;
 `;
 
-// 반응형 생각했을 땐 로고 너비 20vw 하고 높이를 너비에 따라 고정되게 하면 좋을텐데 방법 찾아본 후 수정
-
 export const StNoneBodyBtn = styled.button`
   margin: 0.2rem;
   width: 6rem;
   height: 2.2rem;
   border-radius: 0.5rem;
-  color: #fcfdff;
+  color: ${(props) => props.color || '#fcfdff'};
   background-color: transparent;
   border: none;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 export const StSignDiv = styled.div`
@@ -51,4 +54,5 @@ export const StSignBtn = styled.button`
   color: #2d2d2d;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `;
