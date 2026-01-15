@@ -26,13 +26,13 @@ export const router = createBrowserRouter([
         <Layout />
       </PrivateRoute>
     ),
-    loader: getSessionWithSupabase, // ✅ { session } 반환
+    loader: getSessionWithSupabase,
     children: [
       { path: 'my-page', element: <MyPage /> },
       { path: 'detail/:id', element: <Detail /> },
       { path: 'fix-my-profile', element: <FixMyProfile /> },
       { path: 'select-place', element: <SelectPlace /> },
-      { path: 'writingpage', element: <FeedWrite /> }
+      { path: 'writing-page', element: <FeedWrite /> }
     ]
   },
   {
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         <Layout />
       </PublicRoute>
     ),
-    loader: getSessionWithSupabase, // ✅ { session } 반환
+    loader: getSessionWithSupabase,
     children: [
       { path: 'sign-up', element: <SignUp /> },
       { path: 'log-in', element: <LogIn /> }

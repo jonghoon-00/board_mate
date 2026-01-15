@@ -2,10 +2,11 @@ import styled from 'styled-components';
 export const StDiv = styled.div``;
 
 export const StContainer = styled.div`
-  width: 60%;
+  width: 100%;
+  max-width: 1024px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 200px auto 60px;
+  padding: 24px 2rem;
   box-sizing: border-box;
 `;
 
@@ -68,14 +69,13 @@ export const StButtonDiv = styled.div`
 export const StPostInfo = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
 `;
 export const StContentSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding-top: 2rem;
-  min-height: 40vh;
+  /* gap: 2rem; */
+  /* padding-top: 2rem; */
   & p {
     padding: 20px 0 20px 0;
     word-wrap: break-word;

@@ -1,7 +1,7 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'boardmate-demo';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 let dbPromise = null;
 
@@ -24,6 +24,15 @@ export function getDemoDB() {
           const posts = db.createObjectStore('posts', { keyPath: 'id' });
           posts.createIndex('by-authorId', 'authorId');
           posts.createIndex('by-createdAt', 'createdAt');
+        } else {
+          // 기존 store가 있는데 index가 없을 수도 있으니 보강
+          const posts = db.transaction.objectStore('posts');
+          if (!posts.indexNames.contains('by-authorId')) {
+            posts.createIndex('by-authorId', 'authorId');
+          }
+          if (!posts.indexNames.contains('by-createdAt')) {
+            posts.createIndex('by-createdAt', 'createdAt');
+          }
         }
 
         // comments
@@ -33,29 +42,41 @@ export function getDemoDB() {
           comments.createIndex('by-authorId', 'authorId');
         }
 
-        /**
-         * 데이터 보정(마이그레이션)
-         */
-        if (oldVersion < 2) {
-          // 업그레이드 트랜잭션 컨텍스트에서 접근
-          const tx = db.transaction(['users'], 'readwrite');
-          const store = tx.objectStore('users');
+        // --------- Migration: oldVersion < 3 ----------
+        if (oldVersion < 3 && db.objectStoreNames.contains('posts')) {
+          const tx = db.transaction(['posts'], 'readwrite');
+          const store = tx.objectStore('posts');
 
           let cursor = await store.openCursor();
           while (cursor) {
-            const user = cursor.value;
+            const p = cursor.value;
+            const nowIso = new Date().toISOString();
 
             const next = {
-              // 기존 값 유지
-              ...user,
+              ...p,
 
-              // 스키마 기본값 보정
-              id: user.id,
-              nickname: user.nickname ?? '게스트',
+              // canonical fields
+              id: p.id,
+              title: p.title ?? '',
+              content: p.content ?? '',
+              address: p.address ?? '',
+              image_url: p.image_url ?? null,
+              is_recruit: typeof p.is_recruit === 'boolean' ? p.is_recruit : false,
 
-              favorite: user.favorite,
+              // coordinate 보정: 없으면 기본값
+              coordinate:
+                p.coordinate && typeof p.coordinate === 'object'
+                  ? {
+                      lat: Number(p.coordinate.lat),
+                      lng: Number(p.coordinate.lng)
+                    }
+                  : { lat: 0, lng: 0 },
 
-              image_url: user.image_url ?? null
+              // createdAt 보정: snake_case 혼재 대응
+              createdAt: p.createdAt ?? p.created_at ?? nowIso,
+
+              // 작성자 보정: user_id 혼재 대응
+              authorId: p.authorId ?? p.user_id ?? p.userId ?? null
             };
 
             await cursor.update(next);
@@ -72,8 +93,6 @@ export function getDemoDB() {
 }
 
 export function newId() {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-    return crypto.randomUUID();
-  }
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }

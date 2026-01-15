@@ -3,10 +3,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { StContainer } from '../readPost/readPost.styled';
 import {
   StButtonDiv,
   StCommentCard,
+  StCommentContainer,
   StCommentContentDiv,
   StCommentFormSection,
   StCommentList,
@@ -26,11 +26,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
   const { id: postId } = useParams();
 
   //댓글 불러오기
-  const {
-    data: comments,
-    isPending,
-    isError
-  } = useQuery({
+  const { data: comments } = useQuery({
     queryKey: ['comments', postId],
     queryFn: () => getCommentData(postId)
   });
@@ -92,7 +88,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
 
   return (
     <>
-      <StContainer>
+      <StCommentContainer>
         <StCommentFormSection onSubmit={addComment}>
           <p>{comments?.length}개의 댓글</p>
           <StTextArea
@@ -119,7 +115,6 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
                       <p>{dayjs(comment.created_at).locale('ko').format('YYYY-MM-DD HH:mm')}</p>
                     </StCommentWriterInfoDiv>
                     <StButtonDiv $commentEditAuthority={comment.user_id === userInfo?.id}>
-                      {/* TODO 버튼: 작성자 본인에게만 보여야함 */}
                       {commentIsEdit && editingCommentId === comment.id ? (
                         <button type="button" onClick={() => updateCommentHandler(comment)}>
                           완료
@@ -157,7 +152,7 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
             })}
           </ul>
         </StCommentList>
-      </StContainer>
+      </StCommentContainer>
     </>
   );
 };

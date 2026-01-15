@@ -6,7 +6,7 @@ export const StContainer = styled.div`
   gap: 1rem;
   width: 60%;
   height: auto;
-  margin: 60px auto;
+  margin: 160px auto 24px;
   padding: 1.2rem 1rem 1.2rem 1.5rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;

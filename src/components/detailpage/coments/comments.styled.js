@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 
+export const StCommentContainer = styled.div`
+  width: 100%;
+  max-width: 1024px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 auto 48px;
+  padding: 24px 2rem;
+  box-sizing: border-box;
+`;
+
 export const StCommentFormSection = styled.form`
   height: auto;
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto;
-  padding: 1.2rem 1rem;
+  padding: 0 1rem 1.2rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   border-radius: 10px;
