@@ -1,7 +1,13 @@
 import { openDB } from 'idb';
 
-const DB_NAME = 'boardmate-demo';
+/**
+ * v1: users/posts/comments store 생성
+ * v2: users 스키마 기본값 보정(마이그레이션)
+ * v3: posts 스키마 정규화(title/content/address/coordinate/createdAt/authorId)
+ * v4: comments 인덱스(by-createdAt) 추가 + snake/camel 혼재 보정
+ */
 const DB_VERSION = 4;
+const DB_NAME = 'boardmate-demo';
 
 let dbPromise = null;
 
