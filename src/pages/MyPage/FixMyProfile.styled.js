@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StFixSection = styled.section`
+  margin-top: 153px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,11 +82,11 @@ const StButtons = styled.div`
 
 export {
   StButtons,
+  StFixProfile,
+  StFixSection,
   StLabelGame,
   StLabelNick,
   StProfileBox,
   StProfilePicBox,
-  StProfilePics,
-  StFixProfile,
-  StFixSection
+  StProfilePics
 };

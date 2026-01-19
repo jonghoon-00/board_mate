@@ -1,6 +1,7 @@
 import { getHomePosts } from '@/api/api.posts';
 import img from '@/assets/mainitem.png';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import {
   StButtonBox,
   StCard,
@@ -21,7 +22,6 @@ import {
   StSlideSection,
   StTitle,
   StUserInfo,
-  StUserProfileImage,
   StUsername
 } from './Home.styled';
 
@@ -87,7 +87,7 @@ export const Home = () => {
 
                         <StCardFooter>
                           <StUserInfo>
-                            <StUserProfileImage src={post.users.image_url} />
+                            {/* <StUserProfileImage src={post.users.image_url} /> */}
                             <StUsername>{post.users.nickname}</StUsername>
                           </StUserInfo>
 

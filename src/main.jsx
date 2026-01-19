@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
+import KakaoLoaderGate from './KakaoLoaderGate';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <Provider store={store}>
-  <App />
-  // </Provider>
+  <KakaoLoaderGate>
+    <App />
+  </KakaoLoaderGate>
 );

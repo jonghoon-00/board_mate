@@ -1,9 +1,11 @@
-import { getUser, updateProfileWithSupabase } from '@/api/api.auth';
-import supabase from '@/supabase/supabaseClient';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+// FixMyProfile.jsx 핵심 부분만 (구조 유지 + submit 정상)
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+
+import { getUser, updateProfileWithSupabase } from '@/api/api.auth';
+import { DEMO_MODE } from '@/config/demoMode';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import Button from './Button';
 import {
   StButtons,
@@ -16,8 +18,20 @@ import {
   StProfilePics
 } from './FixMyProfile.styled';
 
+function fileToDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('이미지 변환에 실패했습니다.'));
+    reader.readAsDataURL(file);
+  });
+}
+
 function FixMyProfile() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const fileInputRef = useRef(null);
+
   const {
     data: user,
     isPending,
@@ -28,120 +42,131 @@ function FixMyProfile() {
     gcTime: 0
   });
 
-  const navigate = useNavigate();
-
-  const [profileImage, setProfileImage] = useState('');
   const [profileName, setProfileName] = useState('');
-  const [userId, setUserId] = useState('');
   const [profileFavorite, setProfileFavorite] = useState('');
+
+  const [baseImageUrl, setBaseImageUrl] = useState('');
+  const [profileImageFile, setProfileImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  useEffect(() => {
+    if (!user) return;
+    setProfileName(user.nickname ?? '');
+    setProfileFavorite(user.favorite ?? '');
+    setBaseImageUrl(user.image_url ?? '');
+    setProfileImageFile(null);
+    setPreviewUrl('');
+  }, [user]);
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files?.[0];
     if (!file) return;
-    setProfileImage(file);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewUrl(reader.result);
-    };
+
+    setProfileImageFile(file);
+    const dataUrl = await fileToDataURL(file);
+    setPreviewUrl(dataUrl);
   };
 
-  const handleNameChange = (e) => {
-    setProfileName(e.target.value);
-  };
-
-  const handleFavoriteChange = (e) => {
-    setProfileFavorite(e.target.value);
-  };
-
-  // 닉네임, 프로필사진 변경
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const imageId = uuidv4();
-    const FILE_NAME = 'profile_image';
-    const fileUrl = `${FILE_NAME}_${imageId}`;
+    if (!user) return;
 
     const updatingObj = {};
 
-    if (!profileName) {
-      return alert('변경된 것이 없습니다!');
+    const nextNickname = (profileName ?? '').trim();
+    const prevNickname = (user.nickname ?? '').trim();
+    if (nextNickname && nextNickname !== prevNickname) {
+      updatingObj.nickname = nextNickname;
     }
 
-    if (profileName !== user.nickname) {
-      updatingObj.nickname = profileName;
+    const nextFavorite = (profileFavorite ?? '').trim();
+    const prevFavorite = (user.favorite ?? '').trim();
+    if (nextFavorite !== prevFavorite) {
+      updatingObj.favorite = nextFavorite; // string 고정
     }
 
-    if (profileFavorite !== user.favorite) {
-      updatingObj.favorite = profileFavorite;
+    if (profileImageFile instanceof File) {
+      if (DEMO_MODE) {
+        updatingObj.image_url = previewUrl || (await fileToDataURL(profileImageFile));
+      } else {
+        const [{ default: supabase }, { v4: uuidv4 }] = await Promise.all([
+          import('@/supabase/supabaseClient'),
+          import('uuid')
+        ]);
+
+        const fileKey = `profile_image_${uuidv4()}`;
+
+        const uploadRes = await supabase.storage.from('avatars').upload(fileKey, profileImageFile, { upsert: true });
+
+        if (uploadRes?.error) {
+          alert('업로드에 실패했습니다.');
+          return;
+        }
+
+        const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileKey);
+        updatingObj.image_url = publicUrl.data.publicUrl;
+      }
     }
 
-    if (profileImage !== user.image_url) {
-      // const existFileName = user.image_url.split('avatars/')[1];
-      // console.log(existFileName);
-      // const { data, error } = await supabase.storage.from('avatars').remove([existFileName]);
-      // console.log(data, error);
-
-      const response = await supabase.storage.from('avatars').upload(fileUrl, profileImage, { upsert: true });
-      const publicUrl = supabase.storage.from('avatars').getPublicUrl(fileUrl); //superbase에서 받아온 이미지url
-
-      updatingObj.image_url = publicUrl.data.publicUrl;
+    if (Object.keys(updatingObj).length === 0) {
+      alert('변경된 것이 없습니다!');
+      return;
     }
 
-    const response = await updateProfileWithSupabase(updatingObj, user.id);
-
-    queryClient.invalidateQueries(['user']);
+    await updateProfileWithSupabase(updatingObj, user.id);
+    await queryClient.invalidateQueries({ queryKey: ['user'] });
 
     alert('프로필 변경이 성공적으로 완료되었습니다!');
-
     navigate('/my-page');
   };
-
-  const handleBackClick = () => {
-    navigate('/my-page');
-  };
-
-  useEffect(() => {
-    if (user) {
-      setProfileImage(user.image_url);
-      setProfileName(user.nickname);
-      setUserId(user.id);
-      setProfileFavorite(user.favorite);
-    }
-  }, [user]);
 
   if (isPending) return <div>Loading...</div>;
+  if (isError || !user) return <div>유저 정보를 불러오지 못했습니다.</div>;
 
   return (
     <StFixSection>
-      <StFixProfile>
+      {/* ✅ 핵심: DOM 추가 없이 form으로 렌더링 */}
+      <StFixProfile as="form" onSubmit={handleSubmit}>
         <StProfilePics>
           <StProfilePicBox>
             <img
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              src={previewUrl ? previewUrl : profileImage}
+              src={previewUrl || baseImageUrl}
               alt=""
             />
           </StProfilePicBox>
+
           <Button
-            buttonText={'이미지 변경하기'}
-            color={'#2D2D2D'}
-            type={'button'}
-            onClick={() => document.getElementById('fileInput').click()}
+            buttonText="이미지 변경하기"
+            color="#2D2D2D"
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
           />
-          <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+          />
         </StProfilePics>
+
         <StProfileBox>
           <StLabelNick>
-            닉네임 <input type="text" value={profileName} onChange={handleNameChange} />
+            닉네임 <input type="text" value={profileName} onChange={(e) => setProfileName(e.target.value)} />
           </StLabelNick>
+
           <StLabelGame>
-            좋아하는 게임 <input type="text" value={profileFavorite} onChange={handleFavoriteChange} />
+            좋아하는 게임{' '}
+            <input type="text" value={profileFavorite} onChange={(e) => setProfileFavorite(e.target.value)} />
           </StLabelGame>
         </StProfileBox>
+
         <StButtons>
-          <Button buttonText={'저장'} type={'button'} color="#2D2D2D" onClick={handleSubmit} />
-          <Button buttonText={'돌아가기'} type={'button'} color="#2D2D2D" onClick={handleBackClick} />
+          {/* ✅ submit 버튼 */}
+          <Button buttonText="저장" type="submit" color="#2D2D2D" />
+          <Button buttonText="돌아가기" type="button" color="#2D2D2D" onClick={() => navigate('/my-page')} />
         </StButtons>
       </StFixProfile>
     </StFixSection>

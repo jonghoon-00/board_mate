@@ -4,34 +4,33 @@ export const StHomeSection = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
 `;
 
 export const StSlideSection = styled.section`
-  height: 700px;
   background-color: #f4b061;
   display: flex;
   justify-content: center;
 `;
 
 export const StCardsSection = styled.section`
-  min-height: 300px;
   display: flex;
   justify-content: center;
+  width: 100%;
+  max-width: 1024px;
 `;
 
 export const StCardsCotainer = styled.div`
   min-width: 1000px;
   margin-bottom: 10px;
-  /* background-color: gray; */
 `;
 
 export const StCardsAlignBtn = styled.button`
   margin-top: 2rem;
   margin-bottom: 2rem;
   width: 10rem;
-  height: 2.2rem;
   border-radius: 0.5rem;
   background-color: #fcfdff;
   color: #2d2d2d;
@@ -54,11 +53,10 @@ export const StNoCard = styled.div`
 export const StCard = styled.li`
   background-color: #fcfdff;
   width: 320px;
-  height: 323px;
+  height: auto;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  /* margin: 0 auto 0 auto; */
   gap: 0.5rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 1rem;
@@ -69,7 +67,6 @@ export const StCard = styled.li`
 export const StCardImg = styled.img`
   background-color: black;
   width: 100%;
-  height: 160px;
   border-radius: 0.5rem;
   object-fit: cover;
 `;
@@ -141,7 +138,9 @@ export const StButtonBox = styled.div`
   text-align: center;
 `;
 
-export const StDiv = styled.div``;
+export const StDiv = styled.div`
+  margin-top: 153px;
+`;
 
 export const StCardFooter = styled.div`
   display: flex;
@@ -157,7 +156,6 @@ export const StUserInfo = styled.div`
 
 export const StUserProfileImage = styled.img`
   width: 32px;
-  height: 32px;
   border-radius: 16px;
   object-fit: cover;
 `;

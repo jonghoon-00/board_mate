@@ -1,5 +1,6 @@
 import { getUser } from '@/api/api.auth';
 import { addImage, addPost } from '@/api/api.posts';
+import { DEMO_MODE } from '@/config/demoMode';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
@@ -28,10 +29,14 @@ function WritingForm() {
   const [imageUrl, setImageUrl] = useState(null);
 
   const handleImageUpload = async (e) => {
-    e.preventDefault();
-    const fileObj = e.target.files[0];
-    const data = await addImage(fileObj);
-    setImageUrl(`https://hiovftevpmlwqfamjnpe.supabase.co/storage/v1/object/public/post_images/${data.path}`);
+    if (!DEMO_MODE) {
+      e.preventDefault();
+      const fileObj = e.target.files[0];
+      const data = await addImage(fileObj);
+      setImageUrl(`https://hiovftevpmlwqfamjnpe.supabase.co/storage/v1/object/public/post_images/${data.path}`);
+    } else {
+      setImageUrl('@/assets/just-black.png');
+    }
   };
 
   // add mutation 로직
@@ -71,7 +76,7 @@ function WritingForm() {
         }}
         placeholder="제목을 입력하세요"
       />
-      <StLabel htmlFor="image">이미지 첨부하기</StLabel>
+      {/* <StLabel htmlFor="image">이미지 첨부하기</StLabel> */}
       <StInput type="file" id="image" onChange={handleImageUpload} />
       <StImg src={imageUrl} />
       <StTextArea
@@ -122,7 +127,7 @@ function WritingForm() {
 
 const StContainer = styled.div`
   width: 650px;
-  margin: 2rem auto;
+  margin: 160px auto 12px;
   padding: 30px;
   font-family: Arial, sans-serif;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);

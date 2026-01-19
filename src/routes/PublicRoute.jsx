@@ -1,8 +1,9 @@
 import { Navigate, useLoaderData } from 'react-router-dom';
 
 export const PublicRoute = ({ children }) => {
-  const { session } = useLoaderData();
-  const isSession = !!session;
-  if (isSession) return <Navigate to="/" />;
+  const data = useLoaderData();
+  const session = data?.session ?? null;
+
+  if (session) return <Navigate to="/" replace />;
   return <>{children}</>;
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StContainer = styled.div`
-  margin: 0 auto;
+  margin: 156px auto 20px;
 `;
 export const StMapTitle = styled.h2`
   font-size: 30px;

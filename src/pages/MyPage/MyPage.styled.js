@@ -6,6 +6,7 @@ const StSection = styled.section`
   overflow-x: hidden;
   overflow-y: auto;
   align-items: center;
+  margin-top: 153px;
 `;
 
 const StProfile = styled.div`

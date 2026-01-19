@@ -12,8 +12,6 @@ import {
   StCardsCotainer,
   StContent,
   StContentNoImg,
-//   StMyPost,
-//   StNoCard,
   StPlace,
   StPostItem,
   StProfile,
@@ -36,21 +34,29 @@ const MyPage = () => {
     navigate('/fix-my-profile');
   };
 
-  const {
-    data: user,
-    isPending,
-    isError
-  } = useQuery({
+  const { data: user, isPending: userPending } = useQuery({
     queryKey: ['user'],
     queryFn: getUser
   });
 
-  const { data: posts } = useQuery({
+  const { data: posts, isPending: postsPending } = useQuery({
     queryKey: ['posts'],
     queryFn: getPosts
   });
 
-  if (isPending) return <div>Loading...</div>;
+  if (userPending || postsPending) return <div>Loading...</div>;
+
+  // 데모/로그아웃 상태 방어
+  if (!user) {
+    return (
+      <StSection>
+        <div style={{ padding: 20 }}>
+          <h3>로그인이 필요합니다.</h3>
+          <button onClick={() => navigate('/login')}>로그인 하러가기</button>
+        </div>
+      </StSection>
+    );
+  }
 
   return (
     <StSection>
@@ -67,45 +73,42 @@ const MyPage = () => {
           <Button type="button" buttonText="프로필 수정" onClick={onClickProfile} color="#2D2D2D"></Button>
         </StButton>
       </StProfile>
+
       <br />
-      {/* <StMyPost>내가 작성한 게시물</StMyPost> */}
       <br />
+
       <StCardsCotainer>
         <StCards>
           {posts && posts.length ? (
             posts
-              .filter((post) => {
-                return post.user_id === user.id;
-              })
-              .map((post) => {
-                return (
-                  <Link style={{ textDecoration: 'none' }} key={post.id} to={`/detail/${post.id}`}>
-                    <StCard>
-                      {post.image_url && <StCardImg src={post.image_url} />}
-                      <StTitle>{post.title}</StTitle>
-                      <StPlace>{post.address}</StPlace>
-                      {post.image_url ? (
-                        <StContent>{post.content}</StContent>
-                      ) : (
-                        <StContentNoImg>{post.content}</StContentNoImg>
-                      )}
+              .filter((post) => post.user_id === user.id)
+              .map((post) => (
+                <Link style={{ textDecoration: 'none' }} key={post.id} to={`/detail/${post.id}`}>
+                  <StCard>
+                    {post.image_url && <StCardImg src={post.image_url} />}
+                    <StTitle>{post.title}</StTitle>
+                    <StPlace>{post.address}</StPlace>
 
-                      <StCardFooter>
-                        <StUserInfo>
-                          <StUserProfileImage src={post.users.image_url} />
-                          <StUsername>{post.users.nickname}</StUsername>
-                        </StUserInfo>
+                    {post.image_url ? (
+                      <StContent>{post.content}</StContent>
+                    ) : (
+                      <StContentNoImg>{post.content}</StContentNoImg>
+                    )}
 
-                        <StPostItem>{post.is_recruit ? '모집 완료' : '모집중'}</StPostItem>
-                      </StCardFooter>
-                    </StCard>
-                  </Link>
-                );
-              })
+                    <StCardFooter>
+                      <StUserInfo>
+                        <StUserProfileImage src={post.users?.image_url} />
+                        <StUsername>{post.users?.nickname}</StUsername>
+                      </StUserInfo>
+
+                      <StPostItem>{post.is_recruit ? '모집 완료' : '모집중'}</StPostItem>
+                    </StCardFooter>
+                  </StCard>
+                </Link>
+              ))
           ) : (
             <>
               <div></div>
-              {/* <StNoCard>작성된 게시물이 없습니다</StNoCard> */}
               <div></div>
             </>
           )}

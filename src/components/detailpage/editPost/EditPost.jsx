@@ -20,8 +20,7 @@ const EditPost = ({ setIsEdit }) => {
     queryKey: ['post'],
     queryFn: () => getPost(postId)
   });
-  console.log(targetData);
-  const { content, image_url, is_recruit, title } = targetData;
+  const { id, user_id, content, image_url, is_recruit, title } = targetData;
 
   const [recruit, setRecruit] = useState(is_recruit);
   const [isEditPlace, setIsEditPlace] = useState(false);
@@ -43,23 +42,19 @@ const EditPost = ({ setIsEdit }) => {
     return <div>Loading...</div>;
   }
 
-  const today = new Date();
-
   const updatePostHandler = (targetData) => {
     if (!title.trim() || !content.trim()) {
       alert('제목과 내용을 전부 입력하세요.');
       return;
     }
-    console.log(newTitle);
     updatePostMutation.mutate({
-      created_at,
-      is_recruit: recruit,
+      id,
       address: localStorage.getItem('address'),
       title: newTitle,
       content: newContent,
-      id,
-      user_id,
       image_url,
+      is_recruit: recruit,
+      user_id,
       coordinate: {
         lat: localStorage.getItem('y'),
         lng: localStorage.getItem('x')

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
-import { deletePost, getPost } from '@/api/api.posts';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+
+import { deletePost, getPost } from '@/api/api.posts';
 import { useNavigate, useParams } from 'react-router-dom';
 import Comments from '../coments/Comments';
 import {
@@ -71,7 +73,6 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
   localStorage.setItem('y', targetData.coordinate?.lat);
 
   const date = dayjs(created_at).locale('ko').format('YYYY-MM-DD HH:mm');
-
   return (
     <>
       <StContainer>
@@ -96,7 +97,11 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
           </StButtonDiv>
         </StSubSection>
         <StContentSection>
-          <StImaDiv>{image_url && <StPostImage src={image_url} alt="image" />}</StImaDiv>
+          {image_url && (
+            <StImaDiv>
+              <StPostImage src={image_url} alt="image" />
+            </StImaDiv>
+          )}
 
           <p>{content}</p>
 
@@ -115,9 +120,9 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
               draggable={false}
               zoomable={false}
             >
-              <MapMarker // 마커를 생성합니다
+              <MapMarker
                 position={{
-                  // 마커가 표시될 위치입니다
+                  // 마커가 표시될 위치
                   lat: coordinate.lat,
                   lng: coordinate.lng
                 }}
