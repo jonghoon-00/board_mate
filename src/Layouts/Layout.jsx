@@ -1,4 +1,3 @@
-// Layout.jsx
 import { getSessionWithSupabase, signOutWithSupabase } from '@/api/api.auth';
 import imgsrc from '@/assets/main-logo.svg';
 import { DemoModeBanner } from '@/components/DemoModeBanner';

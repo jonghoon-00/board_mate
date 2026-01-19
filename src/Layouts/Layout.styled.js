@@ -20,18 +20,17 @@ export const StHeader = styled.section`
   align-items: center;
   padding: 5px 20px;
   box-sizing: border-box;
+  z-index: 9999;
 `;
 
 export const StLogo = styled.img`
-  width: 340px;
-  height: 60px;
-  margin-right: 10px;
+  width:clamp(120px,26vw,340px);
 `;
 
 export const StNoneBodyBtn = styled.button`
   margin: 0.2rem;
-  width: 6rem;
-  height: 2.2rem;
+  /* width: 6rem; */
+  /* height: 2.2rem; */
   border-radius: 0.5rem;
   color: ${(props) => props.color || '#fcfdff'};
   background-color: transparent;
