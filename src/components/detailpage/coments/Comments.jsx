@@ -71,7 +71,9 @@ const Comments = ({ setCommentIsEdit, commentIsEdit, userInfo }) => {
   });
 
   const deleteCommentHandler = (commentId) => {
-    deleteMutation.mutate(commentId);
+    if(confirm('댓글을 삭제하시겠습니까?')){
+      deleteMutation.mutate(commentId);
+    }
   };
 
   const updateMutation = useMutation({
