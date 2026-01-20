@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 import { deletePost, getPost } from '@/api/api.posts';
+import { dummyPosts } from '@/demo/dummyPosts';
 import { useNavigate, useParams } from 'react-router-dom';
 import Comments from '../coments/Comments';
 import {
@@ -35,7 +36,7 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
     isPending,
     isError
   } = useQuery({
-    queryKey: ['post'],
+    queryKey: ['post', postId],
     queryFn: () => getPost(postId)
   });
 
@@ -62,17 +63,21 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
     return <div>Error...</div>;
   }
 
-  if (!targetData) {
+  const fallbackDummy = dummyPosts.find((post) => post.id === postId) ?? null;
+  const postData = targetData ?? fallbackDummy;
+
+  if (!postData) {
     return <div>No data</div>;
   }
 
-  const { title, address, image_url, is_recruit, content, user_id, coordinate, created_at } = targetData;
+  const { title, address, image_url, is_recruit, content, user_id, authorId, coordinate, created_at, createdAt } =
+    postData;
 
-  localStorage.setItem('address', targetData.address);
-  localStorage.setItem('x', targetData.coordinate?.lng);
-  localStorage.setItem('y', targetData.coordinate?.lat);
+  localStorage.setItem('address', postData.address);
+  localStorage.setItem('x', postData.coordinate?.lng);
+  localStorage.setItem('y', postData.coordinate?.lat);
 
-  const date = dayjs(created_at).locale('ko').format('YYYY-MM-DD HH:mm');
+  const date = dayjs(created_at ?? createdAt).locale('ko').format('YYYY-MM-DD HH:mm');
   return (
     <>
       <StContainer>
@@ -91,7 +96,7 @@ const ReadPost = ({ setIsEdit, userInfo }) => {
         <StHr />
 
         <StSubSection>
-          <StButtonDiv $postEditAuthority={user_id === userInfo?.id}>
+          <StButtonDiv $postEditAuthority={(user_id ?? authorId) === userInfo?.id}>
             <button onClick={() => setIsEdit(true)}>수정</button>
             <button onClick={() => deletePostHandler(postId)}>삭제</button>
           </StButtonDiv>

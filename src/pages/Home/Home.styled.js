@@ -24,13 +24,14 @@ export const StCardsSection = styled.section`
 
 export const StCardsCotainer = styled.div`
   min-width: 1000px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 `;
 
 export const StCardsAlignBtn = styled.button`
   margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 10rem;
+  padding: 4px 12px;
+  /* width: 10rem; */
   border-radius: 0.5rem;
   background-color: #fcfdff;
   color: #2d2d2d;
@@ -41,7 +42,7 @@ export const StCards = styled.ul`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 320px));
-  grid-auto-rows: minmax(323px, 0);
+  /* grid-auto-rows: minmax(323px, 0); */
   justify-content: space-between;
   row-gap: 60px;
 `;
@@ -53,7 +54,7 @@ export const StNoCard = styled.div`
 export const StCard = styled.li`
   background-color: #fcfdff;
   width: 320px;
-  height: auto;
+  height: 200px;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

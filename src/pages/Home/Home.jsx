@@ -1,6 +1,8 @@
 import { getHomePosts } from '@/api/api.posts';
 import img from '@/assets/mainitem.png';
+import { dummyPosts } from '@/demo/dummyPosts';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   StButtonBox,
@@ -27,7 +29,14 @@ import {
 
 const ITEMS_PER_PAGE = 3;
 
+const pickCreatedAt = (post) => post.createdAt ?? post.created_at ?? '';
+const sortByCreatedAtDesc = (a, b) =>
+  String(pickCreatedAt(b)).localeCompare(String(pickCreatedAt(a)));
+const sortByCreatedAtAsc = (a, b) =>
+  String(pickCreatedAt(a)).localeCompare(String(pickCreatedAt(b)));
+
 export const Home = () => {
+  const [isLatest, setIsLatest] = useState(true);
   const {
     data: posts,
     fetchNextPage,
@@ -58,8 +67,13 @@ export const Home = () => {
     }
   });
 
+  const mergedPosts = useMemo(() => {
+    const combined = [...dummyPosts, ...(posts ?? [])];
+    return combined.sort(isLatest ? sortByCreatedAtDesc : sortByCreatedAtAsc);
+  }, [isLatest, posts]);
+
   if (error) return <div>{error}</div>;
-  // if (isPending || !posts.length) return <div>Loading...</div>;
+  if (isPending && !posts?.length) return <div>Loading...</div>;
 
   return (
     <StDiv>
@@ -69,10 +83,12 @@ export const Home = () => {
         </StSlideSection>
         <StCardsSection>
           <StCardsCotainer>
-            <StCardsAlignBtn>▼ 최신순</StCardsAlignBtn>
-            {posts && posts.length ? (
+            <StCardsAlignBtn onClick={() => setIsLatest((prev) => !prev)}>
+              ▼ {isLatest ? '최신순' : '오래된순'}
+            </StCardsAlignBtn>
+            {mergedPosts.length ? (
               <StCards>
-                {posts.map((post) => {
+                {mergedPosts.map((post) => {
                   return (
                     <Link style={{ textDecoration: 'none' }} key={post.id} to={`/detail/${post.id}`}>
                       <StCard>
