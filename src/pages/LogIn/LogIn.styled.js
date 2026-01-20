@@ -5,6 +5,7 @@ const StDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
   gap: 20px;
   width: 680px;
   height: 600px;
@@ -60,4 +61,5 @@ export const StSignUpButton = styled.button`
   }
 `;
 
-export { StDiv, StTitle, StForm, StButton };
+export { StButton, StDiv, StForm, StTitle };
+

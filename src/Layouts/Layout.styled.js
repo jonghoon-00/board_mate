@@ -45,7 +45,7 @@ export const StSignDiv = styled.div`
 `;
 
 export const StSignBtn = styled.button`
-  width: 7rem;
+  /* width: 7rem; */
   height: 2.2rem;
   margin-right: 0.2rem;
   border-radius: 0.5rem;
